@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "description": "Compare performance across multiple versions of your code",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo 'no tests'"
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,11 @@
   "bugs": {
     "url": "https://github.com/cobblers-children/faceoff/issues"
   },
-  "homepage": "https://github.com/cobblers-children/faceoff#readme"
+  "homepage": "https://github.com/cobblers-children/faceoff#readme",
+  "dependencies": {
+    "bench-node": "^0.8.0"
+  },
+  "devDependencies": {
+    "prom-client": "^15.1.1"
+  }
 }
