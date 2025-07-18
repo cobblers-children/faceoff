@@ -6,21 +6,23 @@ const benchmark = await Faceoff.create({
   "prom-client@latest": "prom-client@latest",
 });
 
-benchmark.add('new Registry()', ({ Registry }) => {
-  new Registry();
-});
-
-let counter = 0;
-
-benchmark.add('new Counter()', ({ Counter }, registry) => {
-  return new Counter({
-    name: `Counter_${counter++}`,
-    help: 'Counter',
-    labelNames: [],
-    registers: [registry]
+benchmark.suite('constructors', (suite) => {
+  suite.add('new Registry()', ({ Registry }) => {
+    new Registry();
   });
-}, {
-  setup: ({ Registry }) => new Registry()
-});
+
+  let counter = 0;
+
+  suite.add('new Counter()', ({ Counter }, registry) => {
+    return new Counter({
+      name: `Counter_${counter++}`,
+      help: 'Counter',
+      labelNames: [],
+      registers: [registry]
+    });
+  }, {
+    setup: ({ Registry }) => new Registry()
+  });
+})
 
 const results = await benchmark.run();
