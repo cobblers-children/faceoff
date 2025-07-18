@@ -41,8 +41,15 @@ class Faceoff {
       const module = this.versions[version];
 
       suite.add(`${name} ⇒ ${version}`,
+        {
+          minSamples: 80,
+          minTime: 0.5,
+          maxTime: 5,
+          // repeatSuite: 2,
+          ...options
+        },
         wrapper(fn, module, options.setup, options.teardown),
-        options);
+          options);
     }
 
     this.suites.push(suite);
@@ -58,12 +65,13 @@ class Faceoff {
     }
 
     console.log("");
-    console.log("Summary:");
 
+    let first = true;
     for (const result of results) {
       console.log("");
 
-      chartReport(result);
+      chartReport(result, { printHeader: first });
+      first = false;
     }
   }
 
