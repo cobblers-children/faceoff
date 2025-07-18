@@ -1,7 +1,9 @@
 import Faceoff from "./index.js";
 
-const benchmark = new Faceoff({ name: 'prom-client@latest', module: await import("prom-client") }, {
-  "prom-client@trunk": await import("../prom-client/index.js"),
+const benchmark = await Faceoff.create({
+  "prom-client@current": await import("../prom-client/index.js"),
+  "prom-client@trunk": "git@github.com:siimon/prom-client",
+  "prom-client@latest": "prom-client@latest",
 });
 
 benchmark.add('new Registry()', ({ Registry }) => {

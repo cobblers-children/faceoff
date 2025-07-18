@@ -1,4 +1,7 @@
+import Path from "path";
+import {exec} from "child_process";
 import {chartReport, Suite} from "bench-node";
+import { createRequire } from 'node:module';
 
 class Faceoff {
   /**
@@ -6,15 +9,18 @@ class Faceoff {
    * @param current {string: module}
    * @param versions {object}
    */
-  constructor(current, versions) {
-    let name = current.name ?? "current";
-
-    this.versions = {
-      [name]: current.module ?? current,
-      ...versions
-    };
-
+  constructor(versions) {
+    this.versions = versions;
     this.suites = [];
+  }
+
+  /**
+   *
+   * @param versions {object}
+   * @returns {Promise<Faceoff>}
+   */
+  static async create(versions) {
+    return new Faceoff(await setup(versions));
   }
 
   /**
@@ -44,6 +50,8 @@ class Faceoff {
   }
 
   async run() {
+    let modules = await setup(this.versions);
+
     const results = [];
     for (const suite of this.suites) {
       results.push(await suite.run());
@@ -58,6 +66,52 @@ class Faceoff {
       chartReport(result);
     }
   }
+
+}
+
+/**
+ * Do setup work.
+ *
+ * At present, this is mostly loading of the modules under test.
+ * @param versions {object}
+ * @returns {Promise<void>}
+ */
+async function setup(versions) {
+  const loaded = {};
+
+  for (const [name, value] of Object.entries(versions)) {
+    if (typeof value === "object") {
+      loaded[name] = value;
+    } else {
+      const tempDirName = (await asyncExec('mktemp -d')).trim();
+
+      await asyncExec('mkdir -v node_modules', { cwd: tempDirName });
+
+      const packageSemver = value;
+      const packageName = name.slice(0, name.lastIndexOf("@"));
+
+      console.log(`Installing [${name}]: ${packageName} ${packageSemver}`);
+      const result = await asyncExec(`npm install --ignore-scripts ${packageSemver}`, { cwd: tempDirName });
+      const require = createRequire(Path.join(tempDirName, "node_modules"));
+      const module = await require(packageName);
+
+      loaded[name] = module;
+    }
+  }
+
+  return loaded;
+}
+
+async function asyncExec(command, opts) {
+  return new Promise((resolve, reject) => {
+    exec(command, opts, (error, stdout, stderr) => {
+      if (error) {
+        reject(error);
+      }
+
+      resolve(stdout);
+    });
+  });
 }
 
 function wrapper(fn, module, setup, teardown) {
