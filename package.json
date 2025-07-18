@@ -2,10 +2,12 @@
   "name": "faceoff",
   "version": "0.1.0",
   "description": "Compare performance across multiple versions of your code",
-  "main": "index.js",
+  "main": "lib/index.js",
   "type": "module",
   "scripts": {
-    "test": "node --allow-natives-syntax test.js"
+    "test": "npm run unit && npm run integration",
+    "unit": "node --test --test-reporter dot",
+    "integration": "node --allow-natives-syntax integration.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,7 @@
     "bench-node": "^0.9.0"
   },
   "devDependencies": {
+    "chai": "^5.2.1",
     "prom-client": "^15.1.1"
   }
 }
