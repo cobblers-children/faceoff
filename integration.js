@@ -21,7 +21,8 @@ benchmark.suite('constructors', (suite) => {
       registers: [registry]
     });
   }, {
-    setup: ({ Registry }) => new Registry()
+    setup: ({ Registry }) => new Registry(),
+    teardown: (mod, registry) => registry.clear(),
   });
 })
 
