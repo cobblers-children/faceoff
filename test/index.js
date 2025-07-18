@@ -1,30 +1,23 @@
 import { describe, it } from "node:test";
 import { expect } from "chai";
+import Util from "../lib/util.js";
 
-describe("foo", () => {
-  describe("bar", () => {
-    it("yay", () => {
-      expect("yay").not.to.be.a("string");
+describe("Util", () => {
+  describe("packageName()", () => {
+    it("exists", () => {
+      expect(Util.packageName).to.exist;
     });
 
-    it("yay1", () => {
-      expect("yay").not.to.be.a("string");
+    it("handles packages with slashes", () => {
+      expect(Util.packageName("@babel/core@latest")).to.equal("@babel/core");
     });
 
-    it("yay2", () => {
-      expect("yay").not.to.be.a("string");
+    it("handles packages without organizations", () => {
+      expect(Util.packageName("core@latest")).to.equal("core");
     });
 
-    it("yay3", () => {
-      expect("yay").not.to.be.a("string");
-    });
-
-    it("yay4", () => {
-      expect("yay").not.to.be.a("string");
-    });
-
-    it("yay5", () => {
-      expect("yay").not.to.be.a("string");
+    it("handles packages without version number organizations", () => {
+      expect(Util.packageName("@babel/core")).to.equal("@babel/core");
     });
   });
 });

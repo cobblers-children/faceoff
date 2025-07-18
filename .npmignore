@@ -1,3 +1,5 @@
 .idea
 
 coverage
+test
+integration.js

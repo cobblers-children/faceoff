@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "npm run unit && npm run integration",
-    "unit": "node --test --test-reporter dot",
+    "unit": "node --test --test-reporter spec",
     "integration": "node --allow-natives-syntax integration.js"
   },
   "repository": {

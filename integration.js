@@ -1,4 +1,4 @@
-import Faceoff from "./index.js";
+import Faceoff from "./lib/index.js";
 
 const benchmark = await Faceoff.create({
   "prom-client@current": await import("../prom-client/index.js"),
