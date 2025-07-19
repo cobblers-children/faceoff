@@ -1,6 +1,6 @@
 import Faceoff from "./lib/index.js";
 
-const benchmark = await Faceoff.create({
+const benchmark = new Faceoff({
   "prom-client@current": await import("../prom-client/index.js"),
   "prom-client@trunk": "git@github.com:siimon/prom-client",
   "prom-client@latest": "prom-client@latest",
