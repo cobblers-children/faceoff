@@ -15,39 +15,29 @@ Features:
 ### Example Output
 
 ```
+Installing [prom-client@trunk]: prom-client git@github.com:siimon/prom-client
+Installing [prom-client@latest]: prom-client prom-client@latest
+constructors ⇒ new Registry() ⇒ prom-client@current x 13,904,688 ops/sec (9 runs sampled) v8-never-optimize=true min..max=(68.88ns...71.19ns)
+constructors ⇒ new Registry() ⇒ prom-client@trunk x 14,292,052 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(68.86ns...71.09ns)
+constructors ⇒ new Registry() ⇒ prom-client@latest x 16,079,874 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(61.55ns...63.07ns)
+constructors ⇒ new Counter() ⇒ prom-client@current x 1,203,507 ops/sec (14 runs sampled) v8-never-optimize=true min..max=(388.00ns...984.24ns)
+constructors ⇒ new Counter() ⇒ prom-client@trunk x 1,458,482 ops/sec (8 runs sampled) v8-never-optimize=true min..max=(627.55ns...709.43ns)
+constructors ⇒ new Counter() ⇒ prom-client@latest x 1,195,390 ops/sec (12 runs sampled) v8-never-optimize=true min..max=(589.62ns...1.02us)
+
 Node.js version: v22.17.0
 Platform: darwin arm64
 CPU Cores: 12 vCPUs | 64.0GB Mem
 
 
-histogram ⇒ startTimer#6 with 2
- ⇒ prom-client@current                        | ██████████████████████████████ | 27,869 ops/sec | 10 samples
- ⇒ prom-client@trunk                          | ███████████████████████------- | 21,328 ops/sec | 9 samples
- ⇒ prom-client@latest                         | █████████████████████████----- | 23,495 ops/sec | 9 samples
+constructors ⇒ new Registry()
+ ⇒ prom-client@current                        | ██████████████████████████---- | 13,904,688 ops/sec | 9 samples
+ ⇒ prom-client@trunk                          | ███████████████████████████--- | 14,292,052 ops/sec | 11 samples
+ ⇒ prom-client@latest                         | ██████████████████████████████ | 16,079,874 ops/sec | 11 samples
 
-util ⇒ hashObject
- ⇒ prom-client@current                        | ██████████████████████████████ | 4,964,671 ops/sec | 10 samples
-
-util ⇒ LabelMap.validate()
- ⇒ prom-client@current                        | ██████████████████████████████ | 18,556,221 ops/sec | 11 samples
-
-util ⇒ LabelMap.keyFrom()
- ⇒ prom-client@current                        | ██████████████████████████████ | 7,806,333 ops/sec | 11 samples
-
-summary ⇒ observe#1 with 64
- ⇒ prom-client@current                        | ██████████████████████████████ | 114,738 ops/sec | 10 samples
- ⇒ prom-client@trunk                          | █████████████████████████████- | 109,239 ops/sec | 11 samples
- ⇒ prom-client@latest                         | ██████████████████████████---- | 98,438 ops/sec | 9 samples
-
-summary ⇒ observe#2 with 8
- ⇒ prom-client@current                        | ██████████████████████████████ | 90,330 ops/sec | 9 samples
- ⇒ prom-client@trunk                          | █████████████████████--------- | 62,740 ops/sec | 9 samples
- ⇒ prom-client@latest                         | ███████████████████████------- | 69,596 ops/sec | 11 samples
-
-summary ⇒ observe#2 with 4 and 2 with 2
- ⇒ prom-client@current                        | ██████████████████████████████ | 49,774 ops/sec | 11 samples
- ⇒ prom-client@trunk                          | ███████████████████████------- | 38,053 ops/sec | 10 samples
- ⇒ prom-client@latest                         | ██████████████████████████---- | 43,256 ops/sec | 9 samples
+constructors ⇒ new Counter()
+ ⇒ prom-client@current                        | █████████████████████████----- | 1,203,507 ops/sec | 14 samples
+ ⇒ prom-client@trunk                          | ██████████████████████████████ | 1,458,482 ops/sec | 8 samples
+ ⇒ prom-client@latest                         | █████████████████████████----- | 1,195,390 ops/sec | 12 samples
 
 ```
 
