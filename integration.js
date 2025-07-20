@@ -1,9 +1,9 @@
 import Faceoff from "./lib/index.js";
 
 const benchmark = new Faceoff({
-  "prom-client@current": await import("../prom-client/index.js"),
-  "prom-client@trunk": "git@github.com:siimon/prom-client",
   "prom-client@latest": "prom-client@latest",
+  "prom-client@trunk": "git@github.com:siimon/prom-client",
+  "prom-client@current": await import("../prom-client/index.js"),
 });
 
 benchmark.suite('constructors', (suite) => {
