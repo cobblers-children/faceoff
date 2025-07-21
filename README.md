@@ -7,10 +7,11 @@ but built on top of [bench-node](https://github.com/RafaelGSS/bench-node).
 
 Features:
 
-- supports comparing multiple versions of modules, including git urls
+- supports comparing multiple versions of modules
+- can install versions from git urls
 - handles async tests
-- can skip tests, such as for brand new functionality 
-- formatted summary view to improve scanning
+- can skip tests for version where functionality is missing 
+- formatted summary view
 
 ### Example Output
 
