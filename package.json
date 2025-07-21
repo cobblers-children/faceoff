@@ -31,12 +31,17 @@
   "devDependencies": {
     "c8": "^10.1.3",
     "chai": "^5.2.1",
+    "chai-as-promised": "^8.0.1",
     "prom-client": "^15.1.1"
   },
   "c8": {
     "all": true,
-    "src": ["./lib"],
-    "extension": [".js"],
+    "src": [
+      "./lib"
+    ],
+    "extension": [
+      ".js"
+    ],
     "report-dir": "./coverage",
     "reporter": "lcov"
   }
