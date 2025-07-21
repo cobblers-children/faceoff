@@ -25,9 +25,6 @@
     "url": "https://github.com/cobblers-children/faceoff/issues"
   },
   "homepage": "https://github.com/cobblers-children/faceoff#readme",
-  "dependencies": {
-    "bench-node": "^0.9.0"
-  },
   "devDependencies": {
     "c8": "^10.1.3",
     "chai": "^5.2.1",

@@ -18,38 +18,45 @@ Features:
 Installing [prom-client@latest]: prom-client prom-client@latest
 Installing [prom-client@trunk]: prom-client git@github.com:siimon/prom-client
 
-constructors ⇒ new Registry() ⇒ prom-client@latest x 16,110,108 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(61.03ns...64.05ns)
-constructors ⇒ new Registry() ⇒ prom-client@trunk x 14,511,233 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(68.00ns...72.23ns)
-constructors ⇒ new Registry() ⇒ prom-client@current x 14,676,220 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(67.79ns...68.99ns)
+constructors ⇒ new Registry() ⇒ prom-client@latest x 15,722,132 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(62.48ns...65.36ns)
+constructors ⇒ new Registry() ⇒ prom-client@trunk x 14,002,714 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(70.76ns...72.81ns)
+constructors ⇒ new Registry() ⇒ prom-client@current x 14,208,801 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(69.80ns...71.12ns)
 
 Summary (vs. baseline):
   constructors ⇒ new Registry() ⇒ prom-client@latest   (baseline)
-  constructors ⇒ new Registry() ⇒ prom-client@trunk    (1.11x slower)
-  constructors ⇒ new Registry() ⇒ prom-client@current  (1.10x slower)
+  constructors ⇒ new Registry() ⇒ prom-client@trunk    (1.12x slower)
+  constructors ⇒ new Registry() ⇒ prom-client@current  (1.11x slower)
 
-constructors ⇒ new Counter() ⇒ prom-client@latest x 1,413,512 ops/sec (13 runs sampled) v8-never-optimize=true min..max=(540.68ns...1.16us)
-constructors ⇒ new Counter() ⇒ prom-client@trunk x 1,485,399 ops/sec (16 runs sampled) v8-never-optimize=true min..max=(324.51ns...827.06ns)
-constructors ⇒ new Counter() ⇒ prom-client@current x 1,348,049 ops/sec (9 runs sampled) v8-never-optimize=true min..max=(534.20ns...785.37ns)
+constructors ⇒ new Counter() ⇒ prom-client@latest x 1,187,074 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(621.03ns...907.70ns)
+constructors ⇒ new Counter() ⇒ prom-client@trunk x 1,435,035 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(567.68ns...838.65ns)
+constructors ⇒ new Counter() ⇒ prom-client@current x 1,256,456 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(700.25ns...933.49ns)
 
 Summary (vs. baseline):
   constructors ⇒ new Counter() ⇒ prom-client@latest   (baseline)
-  constructors ⇒ new Counter() ⇒ prom-client@current  (1.05x slower)
-  constructors ⇒ new Counter() ⇒ prom-client@trunk    (1.05x faster)
+  constructors ⇒ new Counter() ⇒ prom-client@current  (1.06x faster)
+  constructors ⇒ new Counter() ⇒ prom-client@trunk    (1.21x faster)
 
-Node.js version: v24.4.0
+Node.js version: v22.17.1
 Platform: darwin arm64
 CPU Cores: 12 vCPUs | 64.0GB Mem
 
 
 constructors ⇒ new Registry()
- ⇒ prom-client@latest                         | █████████████████████████ | 16,110,108 ops/sec | 11 samples
- ⇒ prom-client@trunk                          | ██████████████████████▌── | 14,511,233 ops/sec | 11 samples
- ⇒ prom-client@current                        | ██████████████████████▌── | 14,676,220 ops/sec | 11 samples
+Node.js version: v22.17.1
+Platform: darwin arm64
+CPU Cores: 12 vCPUs | 64.0GB Mem
+
+ ⇒ prom-client@latest                         | █████████████████████████ | 15,722,132 ops/sec | 11 samples
+ ⇒ prom-client@trunk                          | ██████████████████████─── | 14,002,714 ops/sec | 11 samples
+ ⇒ prom-client@current                        | ██████████████████████▌── | 14,208,801 ops/sec | 11 samples
 
 constructors ⇒ new Counter()
- ⇒ prom-client@latest                         | ███████████████████████▌─ | 1,413,512 ops/sec | 13 samples
- ⇒ prom-client@trunk                          | █████████████████████████ | 1,485,399 ops/sec | 16 samples
- ⇒ prom-client@current                        | ██████████████████████▌── | 1,348,049 ops/sec | 9 samples
+Node.js version: v22.17.1
+Platform: darwin arm64
+CPU Cores: 12 vCPUs | 64.0GB Mem
+
+ ⇒ prom-client@latest                         | ████████████████████▌──── | 1,187,074 ops/sec | 11 samples
+ ⇒ prom-client@trunk                          | █████████████████████████ | 1,435,035 ops/sec | 11 samples
+ ⇒ prom-client@current                        | █████████████████████▌─── | 1,256,456 ops/sec | 10 samples
 
 ```
-
