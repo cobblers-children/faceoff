@@ -41,5 +41,8 @@
     ],
     "report-dir": "./coverage",
     "reporter": "lcov"
+  },
+  "dependencies": {
+    "bench-node": "^0.9.0"
   }
 }
