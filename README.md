@@ -12,6 +12,7 @@ Features:
 - handles async tests
 - can skip tests for version where functionality is missing 
 - formatted summary view
+- exposes metadata for whitebox testing of module internals
 
 ### Example Output
 

@@ -1,9 +1,11 @@
+import { createRequire } from 'node:module';
+import Path from 'path';
 import Faceoff from "./lib/index.js";
 
 const benchmark = new Faceoff({
   "prom-client@latest": "prom-client@latest",
   "prom-client@trunk": "git@github.com:siimon/prom-client",
-  "prom-client@current": await import("../prom-client/index.js"),
+  "prom-client@keys": "git@github.com:cobblers-children/prom-client.git#perf/keys",
 });
 
 benchmark.suite('constructors', (suite) => {
@@ -24,6 +26,33 @@ benchmark.suite('constructors', (suite) => {
     setup: ({ Registry }) => new Registry(),
     teardown: (mod, registry) => registry.clear(),
   });
-})
+});
+
+benchmark.suite('util', (suite) => {
+  suite.add(
+    'LabelMap.keyFrom()',
+    (client, labelMap) => {
+      labelMap.keyFrom({
+        foo: 'longish',
+        user_agent: 'Chrome',
+        status_code: 503,
+      });
+    },
+    {
+      setup: (_, location) => {
+        const require = createRequire(location);
+        const { LabelMap } = require(Path.join(location, "lib/util.js"));
+        return new LabelMap([
+          'foo',
+          'user_agent',
+          'gateway',
+          'method',
+          'status_code',
+        ]);
+      },
+      skip: ["prom-client@latest"],
+    },
+  );
+});
 
 const results = await benchmark.run();
