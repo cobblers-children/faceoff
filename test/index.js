@@ -52,4 +52,32 @@ describe("Util", () => {
       await expect(Util.asyncExec('ls missing_file')).to.be.rejectedWith("Command failed");
     });
   });
+
+  describe('findSlow()', () => {
+    it("exists", () => {
+      expect(Util.findSlow).to.exist;
+    });
+
+    it("handles empty set", () => {
+      expect(() => Util.findSlow()).not.to.throw();
+    });
+
+    it("ignores small discrepancies", () => {
+      let actual = Util.findSlow([
+        [{ opsSec: 20 }, { opsSec: 20 }, { opsSec: 21 }]
+      ]);
+
+      expect(actual).to.be.empty;
+    });
+
+    it("finds regressions", () => {
+      let actual = Util.findSlow([
+        [{ opsSec: 20 }, { opsSec: 20 }, { opsSec: 21 }],
+        [{ opsSec: 21 }, { opsSec: 20 }, { opsSec: 18.5 }]
+      ]);
+
+      expect(actual).have.lengthOf(1);
+      expect(actual[0][2]).to.deep.equal({ opsSec: 18.5, slowest: true });
+    });
+  });
 });
