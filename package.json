@@ -1,6 +1,6 @@
 {
   "name": "faceoff",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Compare performance across multiple versions of your code",
   "main": "lib/index.js",
   "type": "module",
