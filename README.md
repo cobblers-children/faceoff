@@ -17,36 +17,34 @@ Features:
 ### Example Output
 
 ```
-> node --allow-natives-syntax integration.js
-
 Installing [prom-client@latest]: prom-client prom-client@latest
 Installing [prom-client@trunk]: prom-client git@github.com:siimon/prom-client
 Installing [prom-client@keys]: prom-client git@github.com:cobblers-children/prom-client.git#perf/keys
 
-constructors ⇒ new Registry() ⇒ prom-client@latest x 16,511,017 ops/sec (9 runs sampled) v8-never-optimize=true min..max=(60.03ns...60.70ns)
-constructors ⇒ new Registry() ⇒ prom-client@trunk x 14,081,691 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(70.44ns...71.45ns)
-constructors ⇒ new Registry() ⇒ prom-client@keys x 14,057,381 ops/sec (9 runs sampled) v8-never-optimize=true min..max=(70.24ns...71.05ns)
+constructors ⇒ new Registry() ⇒ prom-client@latest x 15,748,821 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(61.87ns...65.77ns)
+constructors ⇒ new Registry() ⇒ prom-client@trunk x 13,610,255 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(71.01ns...75.31ns)
+constructors ⇒ new Registry() ⇒ prom-client@keys x 12,995,102 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(75.71ns...79.26ns)
 
 Summary (vs. baseline):
   constructors ⇒ new Registry() ⇒ prom-client@latest  (baseline)
-  constructors ⇒ new Registry() ⇒ prom-client@keys    (1.17x slower)
-  constructors ⇒ new Registry() ⇒ prom-client@trunk   (1.17x slower)
+  constructors ⇒ new Registry() ⇒ prom-client@keys    (1.21x slower)
+  constructors ⇒ new Registry() ⇒ prom-client@trunk   (1.16x slower)
 
-constructors ⇒ new Counter() ⇒ prom-client@latest x 1,230,247 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(707.65ns...1.02us)
-constructors ⇒ new Counter() ⇒ prom-client@trunk x 1,265,271 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(706.92ns...897.45ns)
-constructors ⇒ new Counter() ⇒ prom-client@keys x 1,217,013 ops/sec (8 runs sampled) v8-never-optimize=true min..max=(767.20ns...815.87ns)
+constructors ⇒ new Counter() ⇒ prom-client@latest x 1,188,199 ops/sec (9 runs sampled) v8-never-optimize=true min..max=(749.28ns...812.53ns)
+constructors ⇒ new Counter() ⇒ prom-client@trunk x 1,248,479 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(685.09ns...928.96ns)
+constructors ⇒ new Counter() ⇒ prom-client@keys x 1,244,583 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(696.67ns...938.41ns)
 
 Summary (vs. baseline):
   constructors ⇒ new Counter() ⇒ prom-client@latest  (baseline)
-  constructors ⇒ new Counter() ⇒ prom-client@keys    (1.01x slower)
-  constructors ⇒ new Counter() ⇒ prom-client@trunk   (1.03x faster)
+  constructors ⇒ new Counter() ⇒ prom-client@keys    (1.05x faster)
+  constructors ⇒ new Counter() ⇒ prom-client@trunk   (1.05x faster)
 
-util ⇒ LabelMap.keyFrom() ⇒ prom-client@trunk x 6,074,173 ops/sec (12 runs sampled) v8-never-optimize=true min..max=(163.55ns...165.70ns)
-util ⇒ LabelMap.keyFrom() ⇒ prom-client@keys  x 7,491,786 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(132.76ns...135.35ns)
+util ⇒ LabelMap.keyFrom() ⇒ prom-client@trunk x 6,053,926 ops/sec (12 runs sampled) v8-never-optimize=true min..max=(163.30ns...167.29ns)
+util ⇒ LabelMap.keyFrom() ⇒ prom-client@keys  x 7,637,732 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(128.47ns...132.77ns)
 
 Summary (vs. baseline):
   util ⇒ LabelMap.keyFrom() ⇒ prom-client@trunk  (baseline)
-  util ⇒ LabelMap.keyFrom() ⇒ prom-client@keys   (1.23x faster)
+  util ⇒ LabelMap.keyFrom() ⇒ prom-client@keys   (1.26x faster)
 
 Node.js version: v22.17.1
 Platform: darwin arm64
@@ -56,31 +54,31 @@ CPU Cores: 12 vCPUs | 64.0GB Mem
 constructors ⇒ new Registry()
 
 Summary (vs. baseline):
- ⇒ prom-client@latest                         | █████████████████████████ | 16,511,017 ops/sec |  9 samples (baseline)
- ⇒ prom-client@trunk                          | █████████████████████──── | 14,081,691 ops/sec | 11 samples (1.17x slower)
- ⇒ prom-client@keys                           | █████████████████████──── | 14,057,381 ops/sec |  9 samples (1.17x slower)
+ ⇒ prom-client@latest                         | █████████████████████████ | 15,748,821 ops/sec | 10 samples (baseline)
+ ⇒ prom-client@trunk                          | █████████████████████▌─── | 13,610,255 ops/sec | 11 samples (1.16x slower)
+ ⇒ prom-client@keys                           | ████████████████████▌──── | 12,995,102 ops/sec | 11 samples (1.21x slower)
 
 constructors ⇒ new Counter()
 
 Summary (vs. baseline):
- ⇒ prom-client@latest                         | ████████████████████████─ | 1,230,247 ops/sec | 10 samples (baseline)
- ⇒ prom-client@trunk                          | █████████████████████████ | 1,265,271 ops/sec | 10 samples (1.03x faster)
- ⇒ prom-client@keys                           | ████████████████████████─ | 1,217,013 ops/sec |  8 samples (1.01x slower)
+ ⇒ prom-client@latest                         | ███████████████████████▌─ | 1,188,199 ops/sec |  9 samples (baseline)
+ ⇒ prom-client@trunk                          | █████████████████████████ | 1,248,479 ops/sec | 10 samples (1.05x faster)
+ ⇒ prom-client@keys                           | ████████████████████████▌ | 1,244,583 ops/sec | 10 samples (1.05x faster)
 
 util ⇒ LabelMap.keyFrom()
 
 Summary (vs. baseline):
- ⇒ prom-client@trunk                          | ████████████████████───── | 6,074,173 ops/sec | 12 samples (baseline)
- ⇒ prom-client@keys                           | █████████████████████████ | 7,491,786 ops/sec | 10 samples (1.23x faster)
+ ⇒ prom-client@trunk                          | ███████████████████▌───── | 6,053,926 ops/sec | 12 samples (baseline)
+ ⇒ prom-client@keys                           | █████████████████████████ | 7,637,732 ops/sec | 11 samples (1.26x faster)
 
 
 Performance Regressions:
 ------------------------
 
 Summary (vs. baseline):
- ⇒ prom-client@latest                         | █████████████████████████ | 16,511,017 ops/sec |  9 samples (baseline)
- ⇒ prom-client@trunk                          | █████████████████████──── | 14,081,691 ops/sec | 11 samples (1.17x slower)
- ⇒ prom-client@keys                           | █████████████████████──── | 14,057,381 ops/sec |  9 samples (1.17x slower)
+ ⇒ prom-client@latest                         | █████████████████████████ | 15,748,821 ops/sec | 10 samples (baseline)
+ ⇒ prom-client@trunk                          | █████████████████████▌─── | 13,610,255 ops/sec | 11 samples (1.16x slower)
+ ⇒ prom-client@keys                           | ████████████████████▌──── | 12,995,102 ops/sec | 11 samples (1.21x slower)
 
 ```
 
