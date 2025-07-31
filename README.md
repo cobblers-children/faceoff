@@ -62,3 +62,42 @@ CPU Cores: 12 vCPUs | 64.0GB Mem
  ⇒ prom-client@current                        | █████████████████████▌─── | 1,256,456 ops/sec | 10 samples
 
 ```
+
+### Usage
+
+You can provide any number of versions of your code to compare against. For particular tests that are
+for new functions, that may exist at HEAD and perhaps trunk, but not in the latest build, you can add a
+skip attribute.
+
+The convention used is that the first version provided is the baseline, and the last listed is the version
+under test
+
+```
+import current from "..";
+
+const benchmark = new Faceoff({
+  "prom-client@latest": "prom-client@latest",
+  "prom-client@trunk": "git@github.com:siimon/prom-client",
+  "prom-client@current": current,
+});
+
+benchmark.suite('constructors', (suite) => {
+  suite.add('new Registry()', ({ Registry }) => new Registry());
+});
+
+benchmark.suite('util', (suite) => {
+  suite.add(
+    'LabelMap.keyFrom()',
+    (client, labelMap) => labelMap.keyFrom({ foo: 'longish', user_agent: 'Chrome', status_code: 503 }),
+    {
+      setup: (_, location) => {
+        const require = createRequire(location);
+        const { LabelMap } = require(Path.join(location, "lib/util.js"));
+        return new LabelMap([ 'foo', 'user_agent' ]);
+      },
+      skip: ["prom-client@latest"],
+    },
+  );
+});
+
+```
