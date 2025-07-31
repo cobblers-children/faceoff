@@ -64,7 +64,7 @@ describe("Util", () => {
 
     it("ignores small discrepancies", () => {
       let actual = Util.findSlow([
-        [{ opsSec: 20 }, { opsSec: 20 }, { opsSec: 21 }]
+        [{ opsSec: 22, fastest: true }, { opsSec: 20 }, { opsSec: 21, slowest: true }]
       ]);
 
       expect(actual).to.be.empty;
@@ -72,8 +72,8 @@ describe("Util", () => {
 
     it("finds regressions", () => {
       let actual = Util.findSlow([
-        [{ opsSec: 20 }, { opsSec: 20 }, { opsSec: 21 }],
-        [{ opsSec: 21 }, { opsSec: 20 }, { opsSec: 18.5 }]
+        [{ opsSec: 20, slowest: true }, { opsSec: 20 }, { opsSec: 21, fastest: true }],
+        [{ opsSec: 21, fastest: true }, { opsSec: 20 }, { opsSec: 18.5, slowest: true }]
       ]);
 
       expect(actual).have.lengthOf(1);
