@@ -16,6 +16,7 @@
   "keywords": [
     "benchmark",
     "performance",
+    "regression",
     "speed",
     "test"
   ],
@@ -43,6 +44,6 @@
     "reporter": "lcov"
   },
   "dependencies": {
-    "bench-node": "^0.9.0"
+    "bench-node": "^0.10.0"
   }
 }
