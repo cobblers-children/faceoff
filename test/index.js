@@ -80,4 +80,16 @@ describe("Util", () => {
       expect(actual[0][2]).to.deep.equal({ opsSec: 18.5, slowest: true });
     });
   });
+
+  describe("install()", () => {
+    it("exists", () => {
+      expect(Util.install).to.exist;
+    });
+  });
+
+  describe("chartResults()", () => {
+    it("exists", () => {
+      expect(Util.chartResults).to.exist;
+    });
+  });
 });
