@@ -120,3 +120,7 @@ benchmark.suite('util', (suite) => {
 });
 
 ```
+
+### Notes
+
+Faceoff does not and will not run post-install scripts for the modules under test.
