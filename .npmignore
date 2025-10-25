@@ -2,6 +2,7 @@
 .github
 
 coverage
+output
 test
 integration.js
 
