@@ -55,4 +55,4 @@ benchmark.suite('util', (suite) => {
   );
 });
 
-const results = await benchmark.run();
+await (await benchmark.run()).outputResults();
