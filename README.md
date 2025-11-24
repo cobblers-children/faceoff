@@ -75,10 +75,10 @@ Summary (vs. baseline):
 Performance Regressions:
 ------------------------
 
-Summary (vs. baseline):
- ⇒ prom-client@latest            | █████████████████████████ | 14,035,024 ops/sec | 12 samples (baseline)
- ⇒ prom-client@trunk             | ████████████████████───── | 11,428,570 ops/sec | 12 samples (1.23x slower)
- ⇒ prom-client@keys              | ███████████████████████▌─ | 13,316,166 ops/sec | 12 samples (1.05x slower)
+constructors ⇒ new Registry()
+ ⇒ prom-client@latest            | █████████████████████████ | 15,173,658 ops/sec | 12 samples (baseline)
+ ⇒ prom-client@trunk             | ███████████████████████── | 14,116,966 ops/sec | 10 samples (1.07x slower)
+ ⇒ prom-client@keys              | ███████████████████████── | 14,081,520 ops/sec | 11 samples (1.08x slower)
 
 ```
 
