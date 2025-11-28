@@ -46,6 +46,6 @@
     "reporter": "lcov"
   },
   "dependencies": {
-    "bench-node": "^0.11.0"
+    "bench-node": "^0.13.0"
   }
 }
