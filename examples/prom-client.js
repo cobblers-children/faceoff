@@ -13,8 +13,6 @@ benchmark.suite('constructors', (suite) => {
     new Registry();
   });
 
-  let counter = 0;
-
   suite.add('new Counter()', ({ Counter }, registry) => {
     return new Counter({
       name: `Counter_${counter++}`,
@@ -23,8 +21,12 @@ benchmark.suite('constructors', (suite) => {
       registers: [registry]
     });
   }, {
-    setup: ({ Registry }) => new Registry(),
+    setup: ({ Registry }) => {
+      global.counter = 0;
+      return new Registry()
+    },
     teardown: (mod, registry) => registry.clear(),
+    useWorkers: true
   });
 });
 
