@@ -15,10 +15,11 @@ Features:
 
 - supports comparing multiple versions of modules
 - can install versions from git urls
-- handles async tests
+- handles async test, setup, and teardown functions
 - can skip tests for version where functionality is missing 
 - formatted summary view
 - exposes metadata for whitebox testing of module internals
+- supports worker threads
 
 ### Performance is a Feature
 

@@ -13,7 +13,6 @@ benchmark.suite('constructors', (suite) => {
     new Registry();
   });
 
-  let counter = 0;
 
   suite.suite('metrics', (suite) => {
     suite.add('new Counter()', ({ Counter }, registry) => {
@@ -40,8 +39,12 @@ benchmark.suite('constructors', (suite) => {
       maxSamples: 6,
     });
   }, {
-    setup: ({Registry}) => new Registry(),
+    setup: ({ Registry }) => {
+      global.counter = 0;
+      return new Registry()
+    },
     teardown: (mod, registry) => registry.clear(),
+    useWorkers: true,
     ttest: true
   });
 });
