@@ -1,5 +1,4 @@
 import { createRequire } from 'node:module';
-import Path from 'path';
 import Faceoff from "../lib/index.js";
 
 const benchmark = new Faceoff({
@@ -13,33 +12,39 @@ benchmark.suite('constructors', (suite) => {
     new Registry();
   });
 
-  let counter = 0;
 
   suite.suite('metrics', (suite) => {
-    suite.add('new Counter()', ({ Counter }, registry) => {
+    suite.add('new Counter()', ({ Counter }, ctx) => {
       return new Counter({
-        name: `Counter_${counter++}`,
+        name: `Counter_${ctx.counter++}`,
         help: 'Counter',
         labelNames: [],
-        registers: [registry]
+        registers: [ctx.registry]
       });
     }, {
       maxTime: 0.1, // Unreasonably short to trigger inconclusive tests
       maxSamples: 6,
     });
 
-    suite.add('new Gauge()', ({ Gauge }, registry) => {
+    suite.add('new Gauge()', ({ Gauge }, ctx) => {
       return new Gauge({
-        name: `Gauge_${counter++}`,
+        name: `Gauge_${ctx.counter++}`,
         help: 'Gauge',
         labelNames: [],
-        registers: [registry]
+        registers: [ctx.registry]
       });
     });
   }, {
-    setup: ({Registry}) => new Registry(),
-    teardown: (mod, registry) => registry.clear()
+    setup: ({ Registry }) => {
+      return {
+        counter: 0,
+        registry: new Registry()
+      };
+    },
+    teardown: (mod, { registry }) => registry.clear()
   });
+}, {
+  useWorkers: true,
 });
 
 benchmark.suite('util', (suite) => {
@@ -53,8 +58,10 @@ benchmark.suite('util', (suite) => {
       });
     },
     {
-      setup: (_, location) => {
+      setup: async (_, location) => {
+        const { createRequire } = await import('node:module');
         const require = createRequire(location);
+        const Path = require('path');
         const foo = require(Path.join(location, "lib/util.js"));
         const { LabelMap } = foo;
 

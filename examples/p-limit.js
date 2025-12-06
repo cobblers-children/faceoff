@@ -18,7 +18,8 @@ benchmark.suite('p-limit', (suite) => {
       await Promise.all(promises);
     }, {
       setup: (pLimit, location) => new pLimit.default(2)
-    });
-  });
+    }
+  );
+}, { useWorkers: true });
 
 await (await benchmark.run()).outputResults();
