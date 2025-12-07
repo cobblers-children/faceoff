@@ -1,3 +1,9 @@
+<h1 align="center">
+  <img src="media/logo.svg" alt="faceoff" />
+</h1>
+
+[![Downloads](https://badgen.net/npm/dt/faceoff)](https://www.npmjs.com/package/faceoff)
+
 ## Benchmarking Tool for Comparing Application Versions
 
 This is a benchmarking tool meant for comparing different versions of the same

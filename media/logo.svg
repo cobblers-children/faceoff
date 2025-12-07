@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="100">
+  <style>
+    text {
+      font-family: "Courier New", monospace;
+
+      /* Add other styling */
+      font-size: 20px;
+      stroke: black;
+      stroke-width: 2;
+      paint-order: stroke fill markers;
+    }
+  </style>
+
+  <text x="40" y="25">▏███████████████████████▌─▕</text>
+  <text x="40" y="55" fill="crimson">▏████████████████████─────▕</text>
+  <text x="40" y="85" fill="seagreen">▏█████████████████████████▕</text>
+</svg>
