@@ -2,7 +2,9 @@
   <img src="media/logo.svg" alt="faceoff" />
 </h1>
 
+[![npm package](https://img.shields.io/npm/v/faceoff)](https://www.npmjs.com/package/faceoff)
 [![Downloads](https://badgen.net/npm/dt/faceoff)](https://www.npmjs.com/package/faceoff)
+[![Issues](https://img.shields.io/github/issues/cobblers-children/faceoff)](https://github.com/cobblers-children/faceoff/issues)
 
 ## Benchmarking Tool for Comparing Application Versions
 
