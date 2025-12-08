@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="media/logo.svg" alt="faceoff" />
+  <img src="media/logo.svg" width="250" alt="faceoff" />
 </h1>
 
 [![npm package](https://img.shields.io/npm/v/faceoff)](https://www.npmjs.com/package/faceoff)
