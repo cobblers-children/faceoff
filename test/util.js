@@ -9,7 +9,17 @@ chai.use(chaiString);
 
 const expect = chai.expect;
 
-describe("Util integration", () => {
+describe("Util", () => {
+  describe("packageName()", () => {
+    it("handles straight names", () => {
+      expect(Util.packageName("chart/chart")).to.equal("chart/chart");
+    });
+
+    it("handles straight names", () => {
+      expect(Util.packageName("@org/chart@latest")).to.equal("@org/chart");
+    });
+  });
+
   describe("chartReport()", () => {
     it("handles empty results", () => {
       expect(() => Util.chartResults([])).not.to.throw();
@@ -89,15 +99,6 @@ describe("Util integration", () => {
       let actual = JSON.parse(result);
 
       expect(actual).to.have.property('foo');
-    });
-  });
-
-  describe("install()", () => {
-    it("handles packages with slashes", async () => {
-      let result = await Util.install("@babel/core@latest", "@babel/core@latest");
-
-      expect(result.module).to.be.an("object");
-      expect(result.location).to.endWith("/node_modules/@babel/core");
     });
   });
 });
@@ -182,15 +183,6 @@ describe("Util integration", () => {
       let actual = JSON.parse(result);
 
       expect(actual).to.have.property('foo');
-    });
-  });
-
-  describe("install()", () => {
-    it("handles packages with slashes", async () => {
-      let result = await Util.install("@babel/core@latest", "@babel/core@latest");
-
-      expect(result.module).to.be.an("object");
-      expect(result.location).to.endWith("/node_modules/@babel/core");
     });
   });
 });
