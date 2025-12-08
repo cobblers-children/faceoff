@@ -1,4 +1,4 @@
-# <img src="media/logo.svg" height="50px" alt="faceoff" /> Faceoff
+# <img src="media/logo.svg" alt="faceoff" height="40px" valign="top" /> Faceoff
 
 [![npm package](https://img.shields.io/npm/v/faceoff)](https://www.npmjs.com/package/faceoff)
 [![Downloads](https://badgen.net/npm/dt/faceoff)](https://www.npmjs.com/package/faceoff)
