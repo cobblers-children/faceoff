@@ -1,13 +1,177 @@
-import { describe, it } from "node:test";
+import { beforeEach, describe, it } from "node:test";
 import * as chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import chaiString from 'chai-string';
-import main from "../lib/index.js";
+import Faceoff from "../lib/index.js";
 
 chai.use(chaiAsPromised);
 chai.use(chaiString);
 
 const expect = chai.expect;
 
-describe("index", () => {
+describe("faceoff", () => {
+  describe("constructor", () => {
+    it("handles an empty set", () => {
+      new Faceoff();
+    });
+  });
+
+  describe("instance functions", () => {
+    let benchmark;
+
+    beforeEach(() => {
+      benchmark = new Faceoff({ currentVersion: { location: "." } });
+    });
+
+    describe("add()", () => {
+      it("can handle direct calls", () => {
+        benchmark.add("naked1", () => {
+        });
+        benchmark.add("naked2", () => {
+        });
+
+        expect(benchmark.suites).to.have.length(2);
+      });
+
+      it("passes options along to bench-node", () => {
+        let badOptions = {minSamples: "blue"};
+
+        expect(() => benchmark.add("topLevel", () => {
+        }, badOptions)).to.throw("name: options.minSamples, value: blue");
+      });
+
+      it("passes options along to bench-node", () => {
+        benchmark.add("topLevel", () => {
+        }, {minSamples: 17});
+
+        expect(benchmark.suites).to.have.length(1);
+      });
+    });
+
+    describe("suite()", () => {
+      it("expects a name and function", () => {
+        expect(benchmark.suite).to.throw();
+      });
+
+      it("expects a name and function", () => {
+        benchmark.suite("name", (suite) => {
+        });
+      });
+
+      it("can add nested tests", () => {
+        benchmark.suite("name", (suite) => {
+          suite.add("a test", () => {
+          });
+        });
+
+        expect(benchmark.suites).to.have.length(1);
+      });
+    });
+
+    describe("run()", () => {
+      it("handles an empty set", async () => {
+        await benchmark.run();
+      });
+
+      it("handles versions", async () => {
+        benchmark = new Faceoff({
+          "faceoff@latest": "faceoff@1.0.0"
+        });
+
+        await benchmark.run();
+      });
+
+      it("calls the tests", async (context) => {
+        let called = false;
+
+        benchmark.add("toRun", () => { called = true;});
+
+        await benchmark.run();
+
+        expect(called).to.equal(true, "to have been called");
+      });
+
+      it("calls the lifecycle setup function", async () => {
+        let called = false;
+
+        benchmark.add("toRun", () => {}, { setup: () => { called = true; } });
+
+        await benchmark.run();
+
+        expect(called).to.equal(true, "to have been called");
+      });
+
+      it("calls the lifecycle teardown function", async () => {
+        let called = false;
+
+        benchmark.add("toRun", () => {}, { teardown: () => { called = true; } });
+
+        await benchmark.run();
+
+        expect(called).to.equal(true, "to have been called");
+      });
+
+      it("calls the lifecycle teardown function even on errors", async () => {
+        let called = false;
+
+        benchmark.add("toRun",
+          () => { throw new Error("Oops")},
+          { teardown: () => { called = true; } }
+        );
+
+        await expect(benchmark.run()).to.be.rejectedWith("Oops");
+
+        expect(called).to.equal(true, "to have been called");
+      });
+
+    });
+
+    describe("outputResults()", () => {
+      it("handles an empty set", async () => {
+        await benchmark.run();
+
+        const results = await benchmark.outputResults();
+
+        expect(results).to.equal("{}");
+      });
+
+      it("handles no run() call", async () => {
+        const results = await benchmark.outputResults();
+
+        expect(results).to.equal("{}");
+      });
+
+      describe("with valid tests", () => {
+        beforeEach(async () => {
+          benchmark.add("test1", () => {});
+
+          benchmark.suite("group 1", (suite) => {
+            benchmark.add("test1", () => {});
+            benchmark.add("test2", () => {});
+          });
+
+          await benchmark.run();
+        });
+
+        it("generates valid JSON", async () => {
+          JSON.parse(await benchmark.outputResults());
+        });
+
+        it("enumerates the tests as a tree", async () => {
+          let results = JSON.parse(await benchmark.outputResults());
+
+          expect(results).to.have.property("group 1 ⇒ test1");
+          expect(results).to.have.property("group 1 ⇒ test2");
+
+          expect(results).to.have.property("test1");
+          expect(results["test1"]).to.be.length(1);
+          expect(results["test1"][0]).to.have.property("name", " ⇒ currentVersion");
+          expect(results["test1"][0]).to.have.property("runsSampled");
+          expect(results["test1"][0]).to.have.property("min");
+          expect(results["test1"][0]).to.have.property("max");
+          expect(results["test1"][0]).to.have.property("opsSec");
+        });
+      });
+    });
+  });
 });

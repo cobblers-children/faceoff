@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "npm run unit && npm run integration",
-    "unit": "c8 node --test --test-reporter spec",
+    "unit": "c8 node --allow-natives-syntax --test --test-reporter spec",
+    "watch": "node --allow-natives-syntax --test --watch --test-reporter spec",
     "integration": "node --allow-natives-syntax integration.js"
   },
   "repository": {
