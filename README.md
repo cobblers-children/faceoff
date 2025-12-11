@@ -103,7 +103,7 @@ import current from "..";
 const benchmark = new Faceoff({
   "prom-client@latest": "prom-client@latest",
   "prom-client@trunk": "git@github.com:siimon/prom-client",
-  "prom-client@current": current,
+  "prom-client@current": { location: "." },
 });
 
 benchmark.suite('constructors', (suite) => {
