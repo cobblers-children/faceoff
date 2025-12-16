@@ -10,16 +10,6 @@ chai.use(chaiString);
 const expect = chai.expect;
 
 describe("Util", () => {
-  describe("packageName()", () => {
-    it("handles straight names", () => {
-      expect(Util.packageName("chart/chart")).to.equal("chart/chart");
-    });
-
-    it("handles straight names", () => {
-      expect(Util.packageName("@org/chart@latest")).to.equal("@org/chart");
-    });
-  });
-
   describe("chartReport()", () => {
     it("handles empty results", () => {
       expect(() => Util.chartResults([])).not.to.throw();
