@@ -106,6 +106,28 @@ describe("faceoff", () => {
       });
 
       it("canonicalizes relative locations", async () => {
+        beforeEach(() => {
+          benchmark = new Faceoff({ currentVersion: { location: "." } });
+        });
+
+        let location;
+
+        benchmark.add("toRun", () => {}, {
+          setup: (module, val) => {
+            location = val;
+          }
+        });
+
+        await benchmark.run();
+
+        expect(location).to.equal(process.cwd());
+      });
+
+      it("accepts absolute paths for locations", async () => {
+        const absolutePath = process.cwd();
+
+        benchmark = new Faceoff({ currentVersion: { location: absolutePath } } );
+
         let location;
 
         benchmark.add("toRun", () => {}, {
