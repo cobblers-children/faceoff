@@ -1,11 +1,11 @@
 import { createRequire } from 'node:module';
 import Path from 'path';
-import Faceoff from "./lib/index.js";
+import Faceoff from "../lib/index.js";
 
 const benchmark = new Faceoff({
-  "prom-client@latest": "prom-client@latest",
-  "prom-client@trunk": "git@github.com:siimon/prom-client",
-  "prom-client@keys": "git@github.com:cobblers-children/prom-client.git#perf/keys",
+  "latest": "prom-client@latest",
+  "trunk": "git@github.com:siimon/prom-client",
+  "#perf/keys": "git@github.com:cobblers-children/prom-client.git#perf/keys",
 });
 
 benchmark.suite('constructors', (suite) => {
@@ -41,7 +41,9 @@ benchmark.suite('util', (suite) => {
     {
       setup: (_, location) => {
         const require = createRequire(location);
-        const { LabelMap } = require(Path.join(location, "lib/util.js"));
+        const foo = require(Path.join(location, "lib/util.js"));
+        const { LabelMap } = foo;
+
         return new LabelMap([
           'foo',
           'user_agent',
@@ -50,7 +52,7 @@ benchmark.suite('util', (suite) => {
           'status_code',
         ]);
       },
-      skip: ["prom-client@latest"],
+      skip: ["latest"],
     },
   );
 });

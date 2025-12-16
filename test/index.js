@@ -105,6 +105,20 @@ describe("faceoff", () => {
         expect(called).to.equal(true, "to have been called");
       });
 
+      it("canonicalizes relative locations", async () => {
+        let location;
+
+        benchmark.add("toRun", () => {}, {
+          setup: (module, val) => {
+            location = val;
+          }
+        });
+
+        await benchmark.run();
+
+        expect(location).to.equal(process.cwd());
+      });
+
       it("calls the lifecycle teardown function", async () => {
         let called = false;
 
