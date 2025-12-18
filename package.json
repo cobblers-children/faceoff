@@ -52,7 +52,7 @@
     "reporter": "lcov"
   },
   "dependencies": {
-    "bench-node": "^0.13.0",
+    "bench-node": "^0.14.0",
     "chai-spies": "^1.1.0"
   }
 }
