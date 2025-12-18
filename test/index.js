@@ -4,12 +4,14 @@ import fs from "node:fs";
 import {tmpdir} from "node:os";
 import { beforeEach, describe, it } from "node:test";
 import chai from 'chai';
+import spies from "chai-spies";
 import chaiAsPromised from 'chai-as-promised';
 import chaiString from 'chai-string';
 import Faceoff from "../lib/index.js";
 
 chai.use(chaiAsPromised);
 chai.use(chaiString);
+chai.use(spies);
 
 const expect = chai.expect;
 
@@ -86,23 +88,23 @@ describe("faceoff", () => {
       });
 
       it("calls the tests", async (context) => {
-        let called = false;
+        let fn = chai.spy(() => {})
 
-        benchmark.add("toRun", () => { called = true;});
+        benchmark.add("toRun", fn);
 
         await benchmark.run();
 
-        expect(called).to.equal(true, "to have been called");
+        expect(fn).to.have.been.called();
       });
 
       it("calls the lifecycle setup function", async () => {
-        let called = false;
+        let setup = chai.spy(() => {})
 
-        benchmark.add("toRun", () => {}, { setup: () => { called = true; } });
+        benchmark.add("toRun", () => {}, { setup });
 
         await benchmark.run();
 
-        expect(called).to.equal(true, "to have been called");
+        expect(setup).to.have.been.called();
       });
 
       it("canonicalizes relative locations", async () => {
@@ -142,26 +144,26 @@ describe("faceoff", () => {
       });
 
       it("calls the lifecycle teardown function", async () => {
-        let called = false;
+        let teardown = chai.spy(() => {})
 
-        benchmark.add("toRun", () => {}, { teardown: () => { called = true; } });
+        benchmark.add("toRun", () => {}, { teardown });
 
         await benchmark.run();
 
-        expect(called).to.equal(true, "to have been called");
+        expect(teardown).to.have.been.called();
       });
 
       it("calls the lifecycle teardown function even on errors", async () => {
-        let called = false;
+        let teardown = chai.spy(() => {})
 
         benchmark.add("toRun",
           () => { throw new Error("Oops")},
-          { teardown: () => { called = true; } }
+          { teardown }
         );
 
         await expect(benchmark.run()).to.be.rejectedWith("Oops");
 
-        expect(called).to.equal(true, "to have been called");
+        expect(teardown).to.have.been.called();
       });
 
     });
