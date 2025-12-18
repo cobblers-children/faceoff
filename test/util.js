@@ -52,7 +52,7 @@ describe("Util", () => {
       expect(result).to.equal("{}");
     });
 
-    it("generates out results", async () => {
+    it("generates well-formed results", async () => {
       let result = Util.toJSON([
         [
           {
