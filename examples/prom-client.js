@@ -25,6 +25,9 @@ benchmark.suite('constructors', (suite) => {
   }, {
     setup: ({ Registry }) => new Registry(),
     teardown: (mod, registry) => registry.clear(),
+    maxTime: 0.1, // Unreasonably short to trigger inconclusive tests
+    maxSamples: 6,
+    ttest: true,
   });
 });
 
