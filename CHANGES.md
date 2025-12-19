@@ -2,6 +2,8 @@
 
 # 1.1.0
 
+ - Green text when no regressions are found
+
 ## Suite Configuration Options
 
  - `new FaceOff({})` no longer accepts a module object as a valid argument. Use a relative or absolute
