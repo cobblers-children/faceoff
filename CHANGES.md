@@ -3,6 +3,7 @@
 # 1.1.0
 
  - Green text when no regressions are found
+ - SuiteOptions typedef renamed to FaceoffOptions to avoid collisions with bench-node
 
 ## Suite Configuration Options
 
