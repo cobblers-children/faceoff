@@ -10,13 +10,13 @@ chai.use(chaiString);
 const expect = chai.expect;
 
 describe("Util", () => {
-  describe("chartReport()", () => {
+  describe("findSlow()", () => {
     it("handles empty results", () => {
-      expect(() => Util.chartResults([])).not.to.throw();
+      expect(() => Util.findSlow([])).not.to.throw();
     });
 
-    it("handles results", () => {
-      let result = Util.chartResults([
+    it("finds slow tests", () => {
+      let input = [
         [
           {
             name: 'foo ⇒ a',
@@ -41,7 +41,80 @@ describe("Util", () => {
             "opsSec": 1801.98778631387,
           },
         ]
-      ]);
+      ];
+
+      let actual = Util.findSlow(input);
+      expect(actual).to.have.length(1);
+    });
+
+    it("filters out fast tests", () => {
+      let input = [
+        [
+          {
+            name: 'foo ⇒ a',
+            iterations: 200,
+            slowest: true,
+            baseline: true,
+            histogram: {
+              "samples": 11,
+              "min": 1966.0067526089626,
+              "max": 2096.9027705175117,
+            },
+            "opsSec": 1989.98778631387,
+          },
+          {
+            name: 'foo ⇒ b',
+            iterations: 200,
+            fastest: true,
+            histogram: {
+              "samples": 12,
+              "min": 1766.0067526089626,
+              "max": 2096.9027705175117,
+            },
+            "opsSec": 1801.98778631387,
+          },
+        ]
+      ];
+
+      let actual = Util.findSlow(input);
+      expect(actual).to.have.length(0);
+    });
+  });
+
+  describe("chartReport()", () => {
+    it("handles empty results", () => {
+      expect(() => Util.chartResults([])).not.to.throw();
+    });
+
+    it("handles results", () => {
+      let input = [
+        [
+          {
+            name: 'foo ⇒ a',
+            iterations: 200,
+            fastest: true,
+            histogram: {
+              "samples": 11,
+              "min": 1966.0067526089626,
+              "max": 2096.9027705175117,
+            },
+            "opsSec": 1989.98778631387,
+          },
+          {
+            name: 'foo ⇒ b',
+            iterations: 200,
+            slowest: true,
+            histogram: {
+              "samples": 12,
+              "min": 1766.0067526089626,
+              "max": 2096.9027705175117,
+            },
+            "opsSec": 1801.98778631387,
+          },
+        ]
+      ];
+
+      expect(() => Util.chartResults(input)).not.to.throw();
     });
   });
 
