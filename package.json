@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "npm run unit && npm run integration",
-    "unit": "c8 node --allow-natives-syntax --test --test-reporter spec",
+    "unit": "c8 node --allow-natives-syntax --test --test-reporter spec 'test/unit/**'",
     "watch": "node --allow-natives-syntax --test --watch --test-reporter spec",
     "integration": "node --allow-natives-syntax examples/prom-client.js && node --allow-natives-syntax examples/p-limit.js"
   },

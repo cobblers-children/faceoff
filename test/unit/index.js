@@ -7,7 +7,7 @@ import chai from 'chai';
 import spies from "chai-spies";
 import chaiAsPromised from 'chai-as-promised';
 import chaiString from 'chai-string';
-import Faceoff from "../lib/index.js";
+import Faceoff from "../../lib/index.js";
 
 chai.use(chaiAsPromised);
 chai.use(chaiString);

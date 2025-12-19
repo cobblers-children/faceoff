@@ -2,7 +2,7 @@ import { describe, it } from "node:test";
 import * as chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import chaiString from 'chai-string';
-import Util from "../lib/util.js";
+import Util from "../../lib/util.js";
 
 chai.use(chaiAsPromised);
 chai.use(chaiString);
