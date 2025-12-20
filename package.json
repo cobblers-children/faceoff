@@ -5,10 +5,13 @@
   "main": "lib/index.js",
   "type": "module",
   "scripts": {
-    "test": "npm run unit && npm run integration",
-    "unit": "c8 node --allow-natives-syntax --test --test-reporter spec",
-    "watch": "node --allow-natives-syntax --test --watch --test-reporter spec",
-    "integration": "node --allow-natives-syntax examples/prom-client.js && node --allow-natives-syntax examples/p-limit.js"
+    "test": "npm run coverage && npm run smoke",
+    "unit": "node --allow-natives-syntax --test --test-reporter spec test/unit/*.js",
+    "integration": "node --allow-natives-syntax --test --test-reporter spec test/integration/*.js",
+    "tests": "npm run unit && npm run integration",
+    "coverage": "c8 npm run tests",
+    "watch": "node --allow-natives-syntax --test --watch --test-reporter spec 'test/unit/**'",
+    "smoke": "node --allow-natives-syntax examples/prom-client.js && node --allow-natives-syntax examples/p-limit.js"
   },
   "repository": {
     "type": "git",
@@ -52,7 +55,7 @@
     "reporter": "lcov"
   },
   "dependencies": {
-    "bench-node": "^0.13.0",
+    "bench-node": "^0.14.0",
     "chai-spies": "^1.1.0"
   }
 }

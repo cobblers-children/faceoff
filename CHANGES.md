@@ -2,6 +2,9 @@
 
 # 1.1.0
 
+ - Green text when no regressions are found
+ - SuiteOptions typedef renamed to FaceoffOptions to avoid collisions with bench-node
+
 ## Suite Configuration Options
 
  - `new FaceOff({})` no longer accepts a module object as a valid argument. Use a relative or absolute
