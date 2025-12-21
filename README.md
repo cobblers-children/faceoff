@@ -103,12 +103,13 @@ constructors ⇒ new Registry()
 
 ### Usage
 
-You can provide any number of versions of your code to compare against. For particular tests that are
-for new functions, that may exist at HEAD and perhaps trunk, but not in the latest build, you can add a
-skip attribute.
+You can provide any number of versions of your code to compare against. For particular tests that
+are for new functions, that may exist at HEAD and perhaps trunk, but not in the latest build, you can
+add a skip attribute.
 
-The convention used is that the first version provided is the baseline, and the last listed is the version
-under test
+The convention used is that the first version provided is the baseline, and the last listed is the
+version under test. Any entries between first and last are reference versions or branches to detect
+if the code under test has undone any improvements added in recent PRs.
 
 ```
 import current from "..";
@@ -139,6 +140,93 @@ benchmark.suite('util', (suite) => {
 });
 
 ```
+
+### benchmark.json file format
+
+It is my intention that this format will be amended in the future but retain the following structure
+until at least 2.0:
+
+```json
+{
+  "constructors ⇒ new Registry()": [
+    {
+      "name": " ⇒ latest",
+      "runsSampled": 13,
+      "min": "56.12ns",
+      "max": "72.86ns",
+      "plugins": [],
+      "opsSec": 14300744
+    },
+    {
+      "name": " ⇒ trunk",
+      "runsSampled": 11,
+      "min": "76.08ns",
+      "max": "79.24ns",
+      "plugins": [],
+      "opsSec": 12946295
+    },
+    {
+      "name": " ⇒ #perf/keys",
+      "runsSampled": 10,
+      "min": "76.05ns",
+      "max": "77.92ns",
+      "plugins": [],
+      "opsSec": 12965191
+    }
+  ],
+  "constructors ⇒ new Counter()": [
+    {
+      "name": " ⇒ latest",
+      "runsSampled": 119,
+      "min": "556.55ns",
+      "max": "1.08us",
+      "plugins": [],
+      "opsSec": 1137460
+    },
+    {
+      "name": " ⇒ trunk",
+      "runsSampled": 96,
+      "min": "312.50ns",
+      "max": "1.25us",
+      "plugins": [],
+      "opsSec": 1153108
+    },
+    {
+      "name": " ⇒ #perf/keys",
+      "runsSampled": 95,
+      "min": "291.50ns",
+      "max": "1.26us",
+      "plugins": [],
+      "opsSec": 1170779
+    }
+  ],
+  "util ⇒ LabelMap.keyFrom()": [
+    {
+      "name": " ⇒ trunk",
+      "runsSampled": 13,
+      "min": "130.41ns",
+      "max": "141.50ns",
+      "plugins": [],
+      "opsSec": 7195488
+    },
+    {
+      "name": " ⇒ #perf/keys",
+      "runsSampled": 11,
+      "min": "136.96ns",
+      "max": "140.96ns",
+      "plugins": [],
+      "opsSec": 7180307
+    }
+  ]
+}
+```
+
+#### Parsing advice
+
+The most likely change in 2.0 would be to the 'name' fields to make it more amenable to
+use as categories/tags in CI/CD telemetry collection. That is easily worked around here by splitting
+the name on ` ⇒ ` and using the first index of the result. If `faceoff` ends up pruning this prefix,
+then your `split()` will become a noop.
 
 ### Notes
 
