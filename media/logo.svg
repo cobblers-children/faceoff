@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="480" height="100">
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="160">
   <style>
     text {
       font-family: "Courier New", monospace;
-      font-size: 20px;
+      font-size: 30px;
 
       stroke: black;
       stroke-width: 2;
@@ -11,15 +11,15 @@
 
     text.title {
       font-family: "Verdana", sans-serif;
-      font-size: 65px;
+      font-size: 80px;
       font-weight: 700;
 
       stroke-width: 0;
     }
   </style>
 
-  <text x="10" y="25" fill="#222">▏████████▌─▕</text>
-  <text x="10" y="55" fill="#cc042C">▏███████───▕</text>
-  <text x="10" y="85" fill="forestgreen">▏██████████▕</text>
-  <text x="180" y="90" class="title" fill="forestgreen">Faceoff</text>
+  <text x="15" y="45" fill="#222">▏████████▌─▕</text>
+  <text x="15" y="90" fill="#cc042C">▏███████───▕</text>
+  <text x="15" y="135" fill="forestgreen">▏██████████▕</text>
+  <text x="250" y="145" class="title" fill="forestgreen">Faceoff</text>
 </svg>
