@@ -20,6 +20,23 @@ Features:
 - formatted summary view
 - exposes metadata for whitebox testing of module internals
 
+### Performance is a Feature
+
+Faceoff and `benchmark-regression` before it are focussed on preventing regressions in pull requests
+by comparing the code in your branch to the same code in master. Where Faceoff differs is that it
+can also compare a feature branch to release branches, or your trunk build. This is particularly
+handy on projects where releases collect a number of PRs into a single build instead of practicing
+Continuous Integration.
+
+But collecting this data also has value after the fact. How often have you been told that the
+application got slower, "sometime in the last couple of weeks" and now you are tasked to figure out
+which of the last 45 commits or 120 dependency upgrades may have introduced the regression. Being
+able to look back through build history looking for evidence of the problem can take a half day
+investigation down to minutes.
+
+Faster feedback loops help teams and developers develop their skills in avoiding unintentional
+slowdowns in the application code.
+
 ### Example Output
 
 ```
