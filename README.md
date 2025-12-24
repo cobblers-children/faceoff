@@ -132,9 +132,9 @@ if the code under test has undone any improvements added in recent PRs.
 import current from "..";
 
 const benchmark = new Faceoff({
-  "prom-client@latest": "prom-client@latest",
-  "prom-client@trunk": "git@github.com:siimon/prom-client",
-  "prom-client@current": { location: "." },
+  "latest": "prom-client@latest",
+  "trunk": "git@github.com:siimon/prom-client",
+  "current": { location: "." },
 });
 
 benchmark.suite('constructors', (suite) => {
