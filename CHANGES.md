@@ -4,6 +4,7 @@
 
  - You can now set default benchmark options on suites, improving ergonomics for nested suites with
 common lifecycle functions or settings
+ - bar chart and test names narrowed to improve legibility in CI/CD and quoted text
 
 ## 1.1.0
 
@@ -22,3 +23,4 @@ path instead. Eg, `{ location: ".." }`. This is a consequence of work done to su
 These aren't exported and thus should not be used by third party code. However for completeness:
 
  - `util.packageName()` has been removed
+
