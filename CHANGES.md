@@ -1,5 +1,9 @@
 # Important Changes
 
+## 1.2.0
+
+ - bar chart and test names narrowed to improve legibility in CI/CD and quoted text
+
 ## 1.1.0
 
  - Green text when no regressions are found
@@ -17,3 +21,4 @@ path instead. Eg, `{ location: ".." }`. This is a consequence of work done to su
 These aren't exported and thus should not be used by third party code. However for completeness:
 
  - `util.packageName()` has been removed
+
