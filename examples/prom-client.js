@@ -29,6 +29,21 @@ benchmark.suite('constructors', (suite) => {
     maxSamples: 6,
     ttest: true,
   });
+
+  suite.add('new Gauge()', ({ Gauge }, registry) => {
+    return new Gauge({
+      name: `Gauge_${counter++}`,
+      help: 'Gauge',
+      labelNames: [],
+      registers: [registry]
+    });
+  }, {
+    setup: ({ Registry }) => new Registry(),
+    teardown: (mod, registry) => registry.clear(),
+    maxTime: 0.1, // Unreasonably short to trigger inconclusive tests
+    maxSamples: 6,
+    ttest: true,
+  });
 });
 
 benchmark.suite('util', (suite) => {
