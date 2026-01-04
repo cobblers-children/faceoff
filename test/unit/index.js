@@ -82,7 +82,7 @@ describe("faceoff", () => {
       });
 
       it("calls the tests", async (context) => {
-        let fn = chai.spy(() => {})
+        let fn = chai.spy(() => {});
 
         benchmark.add("toRun", fn);
 
@@ -90,76 +90,140 @@ describe("faceoff", () => {
 
         expect(fn).to.have.been.called();
       });
+    });
 
-      it("calls the lifecycle setup function", async () => {
-        let setup = chai.spy(() => {})
+    describe("run lifecycle", () => {
+      describe("setup()", () => {
+        it("is invoked", async () => {
+          let setup = chai.spy(() => {});
 
-        benchmark.add("toRun", () => {}, { setup });
+          benchmark.add("toRun", () => {
+          }, { setup });
 
-        await benchmark.run();
+          await benchmark.run();
 
-        expect(setup).to.have.been.called();
-      });
-
-      it("canonicalizes relative locations", async () => {
-        beforeEach(() => {
-          benchmark = new Faceoff({ currentVersion: { location: "." } });
+          expect(setup).to.have.been.called();
         });
 
-        let location;
+        it("receives a canonical path for relative locations", async () => {
+          beforeEach(() => {
+            benchmark = new Faceoff({currentVersion: {location: "."}});
+          });
 
-        benchmark.add("toRun", () => {}, {
-          setup: (module, val) => {
-            location = val;
-          }
+          let location;
+
+          benchmark.add("toRun", () => {
+          }, {
+            setup: (module, val) => {
+              location = val;
+            }
+          });
+
+          await benchmark.run();
+
+          expect(location).to.equal(process.cwd());
         });
 
-        await benchmark.run();
+        it("receives a canonical path from an absolute location", async () => {
+          const absolutePath = process.cwd();
 
-        expect(location).to.equal(process.cwd());
+          benchmark = new Faceoff({currentVersion: {location: absolutePath}});
+
+          let location;
+
+          benchmark.add("toRun", () => {
+          }, {
+            setup: (module, val) => {
+              location = val;
+            }
+          });
+
+          await benchmark.run();
+
+          expect(location).to.equal(process.cwd());
+        });
       });
 
-      it("accepts absolute paths for locations", async () => {
-        const absolutePath = process.cwd();
+      describe("teardown()", () => {
+        it("is called", async () => {
+          let teardown = chai.spy(() => {});
 
-        benchmark = new Faceoff({ currentVersion: { location: absolutePath } } );
+          benchmark.add("toRun", () => {}, { teardown });
 
-        let location;
+          await benchmark.run();
 
-        benchmark.add("toRun", () => {}, {
-          setup: (module, val) => {
-            location = val;
-          }
+          expect(teardown).to.have.been.called();
         });
 
-        await benchmark.run();
+        it("is called on errors", async () => {
+          let teardown = chai.spy(() => {});
 
-        expect(location).to.equal(process.cwd());
+          benchmark.add("toRun",
+              () => { throw new Error("Oops")},
+              { teardown }
+          );
+
+          await expect(benchmark.run()).to.be.rejectedWith("Oops");
+
+          expect(teardown).to.have.been.called();
+        });
       });
 
-      it("calls the lifecycle teardown function", async () => {
-        let teardown = chai.spy(() => {})
+      describe("nested suites", async () => {
+        it("calls the tests", async () => {
+          let test = chai.spy(() => {});
 
-        benchmark.add("toRun", () => {}, { teardown });
+          benchmark.suite("name", (suite) => {
+            suite.suite("nested", (suite) => {
+              suite.add("a test", test);
+            });
+          });
 
-        await benchmark.run();
+          await benchmark.run();
 
-        expect(teardown).to.have.been.called();
+          expect(test).to.have.been.called();
+        });
+
+        describe("defaults", async () => {
+          it("uses the defaults", async () => {
+            let setup = chai.spy(() => {});
+            let teardown = chai.spy(() => {});
+
+            benchmark.suite("name", (suite) => {
+              suite.suite("nested", (suite) => {
+                suite.add("a test", () => {});
+              },
+              { setup, teardown });
+            });
+
+            await benchmark.run();
+
+            expect(setup).to.have.been.called();
+            expect(teardown).to.have.been.called();
+          });
+
+          it("can override the defaults", async () => {
+            let defaultSetup = chai.spy(() => {});
+            let setup = chai.spy(() => {});
+            let teardown = chai.spy(() => {});
+
+            benchmark.suite("name", (suite) => {
+              suite.suite("nested", (suite) => {
+                suite.add("a test", () => {},
+                  { setup, teardown });
+                },
+                { setup: defaultSetup },
+              );
+            });
+
+            await benchmark.run();
+
+            expect(setup).to.have.been.called();
+            expect(defaultSetup).not.to.have.been.called();
+            expect(teardown).to.have.been.called();
+          });
+        });
       });
-
-      it("calls the lifecycle teardown function even on errors", async () => {
-        let teardown = chai.spy(() => {})
-
-        benchmark.add("toRun",
-          () => { throw new Error("Oops")},
-          { teardown }
-        );
-
-        await expect(benchmark.run()).to.be.rejectedWith("Oops");
-
-        expect(teardown).to.have.been.called();
-      });
-
     });
 
     describe("outputResults()", () => {

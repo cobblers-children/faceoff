@@ -44,36 +44,49 @@ Installing [latest]: prom-client@latest
 Installing [trunk]: git@github.com:siimon/prom-client
 Installing [#perf/keys]: git@github.com:cobblers-children/prom-client.git#perf/keys
 
-constructors ⇒ new Registry() ⇒ latest        x 14,300,744 ops/sec (13 runs sampled) min..max=(56.12ns...72.86ns)
-constructors ⇒ new Registry() ⇒ trunk         x 12,946,295 ops/sec (11 runs sampled) min..max=(76.08ns...79.24ns)
-constructors ⇒ new Registry() ⇒ #perf/keys    x 12,965,191 ops/sec (10 runs sampled) min..max=(76.05ns...77.92ns)
+constructors ⇒ new Registry() ⇒ latest        x 15,421,923 ops/sec (11 runs sampled) min..max=(60.03ns...70.78ns)
+constructors ⇒ new Registry() ⇒ trunk         x 13,928,853 ops/sec (10 runs sampled) min..max=(69.93ns...72.07ns)
+constructors ⇒ new Registry() ⇒ #perf/keys    x 14,117,921 ops/sec (11 runs sampled) min..max=(69.80ns...72.05ns)
 
 Summary (vs. baseline):
   constructors ⇒ new Registry() ⇒ latest      (baseline)
-  constructors ⇒ new Registry() ⇒ trunk       (1.10x slower)
-  constructors ⇒ new Registry() ⇒ #perf/keys  (1.10x slower)
+  constructors ⇒ new Registry() ⇒ trunk       (1.11x slower)
+  constructors ⇒ new Registry() ⇒ #perf/keys  (1.09x slower)
 
 T-Test Mode: Enabled (repeatSuite=30)
 
-constructors ⇒ new Counter() ⇒ latest         x 1,137,460 ops/sec (119 runs sampled) min..max=(556.55ns...1.08us)
-constructors ⇒ new Counter() ⇒ trunk          x 1,153,108 ops/sec (96 runs sampled) min..max=(312.50ns...1.25us)
-constructors ⇒ new Counter() ⇒ #perf/keys     x 1,170,779 ops/sec (95 runs sampled) min..max=(291.50ns...1.26us)
+constructors ⇒ metrics ⇒ new Counter() ⇒ latest x 1,165,364 ops/sec (114 runs sampled) min..max=(524.08ns...1.08us)
+constructors ⇒ metrics ⇒ new Counter() ⇒ trunk x 1,240,467 ops/sec (91 runs sampled) min..max=(464.48ns...1.05us)
+constructors ⇒ metrics ⇒ new Counter() ⇒ #perf/keys x 1,234,452 ops/sec (94 runs sampled) min..max=(312.50ns...1.25us)
 
 Summary (vs. baseline):
-  constructors ⇒ new Counter() ⇒ latest      (baseline)
-  constructors ⇒ new Counter() ⇒ trunk       (1.01x faster)
-  constructors ⇒ new Counter() ⇒ #perf/keys  (1.03x faster)
+  constructors ⇒ metrics ⇒ new Counter() ⇒ latest      (baseline)
+  constructors ⇒ metrics ⇒ new Counter() ⇒ #perf/keys  (1.06x faster) **
+  constructors ⇒ metrics ⇒ new Counter() ⇒ trunk       (1.06x faster) **
 
   Significance: * p<0.05, ** p<0.01, *** p<0.001
 
-util ⇒ LabelMap.keyFrom() ⇒ trunk             x 7,195,488 ops/sec (13 runs sampled) min..max=(130.41ns...141.50ns)
-util ⇒ LabelMap.keyFrom() ⇒ #perf/keys        x 7,180,307 ops/sec (11 runs sampled) min..max=(136.96ns...140.96ns)
+T-Test Mode: Enabled (repeatSuite=30)
+
+constructors ⇒ metrics ⇒ new Gauge() ⇒ latest x 1,263,116 ops/sec (154 runs sampled) min..max=(546.66ns...1.11us)
+constructors ⇒ metrics ⇒ new Gauge() ⇒ trunk  x 1,325,398 ops/sec (117 runs sampled) min..max=(333.50ns...1.03us)
+constructors ⇒ metrics ⇒ new Gauge() ⇒ #perf/keys x 1,299,054 ops/sec (67 runs sampled) min..max=(640.38ns...948.08ns)
+
+Summary (vs. baseline):
+  constructors ⇒ metrics ⇒ new Gauge() ⇒ latest      (baseline)
+  constructors ⇒ metrics ⇒ new Gauge() ⇒ #perf/keys  (1.03x faster)
+  constructors ⇒ metrics ⇒ new Gauge() ⇒ trunk       (1.05x faster) ***
+
+  Significance: * p<0.05, ** p<0.01, *** p<0.001
+
+util ⇒ LabelMap.keyFrom() ⇒ trunk             x 7,661,811 ops/sec (12 runs sampled) min..max=(125.51ns...133.63ns)
+util ⇒ LabelMap.keyFrom() ⇒ #perf/keys        x 7,507,553 ops/sec (12 runs sampled) min..max=(130.53ns...134.71ns)
 
 Summary (vs. baseline):
   util ⇒ LabelMap.keyFrom() ⇒ trunk       (baseline)
-  util ⇒ LabelMap.keyFrom() ⇒ #perf/keys  (1.00x slower)
+  util ⇒ LabelMap.keyFrom() ⇒ #perf/keys  (1.02x slower)
 
-Node.js version: v20.19.4
+Node.js version: v22.18.0
 Platform: darwin arm64
 CPU Cores: 12 vCPUs | 64.0GB Mem
 
@@ -81,40 +94,47 @@ CPU Cores: 12 vCPUs | 64.0GB Mem
 constructors ⇒ new Registry()
 
 Summary (vs. baseline):
- ⇒ latest                    ▏█████████████████████████▕ 14,300,744 ops/sec | 13 samples (baseline)
- ⇒ trunk                     ▏██████████████████████▌──▕ 12,946,295 ops/sec | 11 samples (1.10x slower)
- ⇒ #perf/keys                ▏██████████████████████▌──▕ 12,965,191 ops/sec | 10 samples (1.10x slower)
+ ⇒ latest                    ▏█████████████████████████▕ 15,421,923 ops/sec | 11 samples (baseline)
+ ⇒ trunk                     ▏██████████████████████▌──▕ 13,928,853 ops/sec | 10 samples (1.11x slower)
+ ⇒ #perf/keys                ▏██████████████████████▌──▕ 14,117,921 ops/sec | 11 samples (1.09x slower)
 
-constructors ⇒ new Counter()
+constructors ⇒ metrics ⇒ new Counter()
 
 Summary (vs. baseline):
- ⇒ latest                    ▏████████████████████████─▕ 1,137,460 ops/sec | 119 samples (baseline)
- ⇒ trunk                     ▏████████████████████████▌▕ 1,153,108 ops/sec | 96 samples (1.01x faster)
- ⇒ #perf/keys                ▏█████████████████████████▕ 1,170,779 ops/sec | 95 samples (1.03x faster)
+ ⇒ latest                    ▏███████████████████████──▕ 1,165,364 ops/sec | 114 samples (baseline)
+ ⇒ trunk                     ▏█████████████████████████▕ 1,240,467 ops/sec | 91 samples (1.06x faster)
+ ⇒ #perf/keys                ▏████████████████████████▌▕ 1,234,452 ops/sec | 94 samples (1.06x faster)
+
+constructors ⇒ metrics ⇒ new Gauge()
+
+Summary (vs. baseline):
+ ⇒ latest                    ▏███████████████████████▌─▕ 1,263,116 ops/sec | 154 samples (baseline)
+ ⇒ trunk                     ▏█████████████████████████▕ 1,325,398 ops/sec | 117 samples (1.05x faster)
+ ⇒ #perf/keys                ▏████████████████████████▌▕ 1,299,054 ops/sec | 67 samples (1.03x faster)
 
 util ⇒ LabelMap.keyFrom()
 
 Summary (vs. baseline):
- ⇒ trunk                     ▏█████████████████████████▕ 7,195,488 ops/sec | 13 samples (baseline)
- ⇒ #perf/keys                ▏████████████████████████▌▕ 7,180,307 ops/sec | 11 samples (1.00x slower)
+ ⇒ trunk                     ▏█████████████████████████▕ 7,661,811 ops/sec | 12 samples (baseline)
+ ⇒ #perf/keys                ▏████████████████████████─▕ 7,507,553 ops/sec | 12 samples (1.02x slower)
 
 
 Inconclusive Tests:
 ------------------------
 
-constructors ⇒ new Counter()
- ⇒ latest                    ▏████████████████████████─▕ 1,137,460 ops/sec | 119 samples (baseline)
- ⇒ trunk                     ▏████████████████████████▌▕ 1,153,108 ops/sec | 96 samples (1.01x faster)
- ⇒ #perf/keys                ▏█████████████████████████▕ 1,170,779 ops/sec | 95 samples (1.03x faster)
+constructors ⇒ metrics ⇒ new Gauge()
+ ⇒ latest                    ▏███████████████████████▌─▕ 1,263,116 ops/sec | 154 samples (baseline)
+ ⇒ trunk                     ▏█████████████████████████▕ 1,325,398 ops/sec | 117 samples (1.05x faster)
+ ⇒ #perf/keys                ▏████████████████████████▌▕ 1,299,054 ops/sec | 67 samples (1.03x faster)
 
 
 Performance Regressions:
 ------------------------
 
 constructors ⇒ new Registry()
- ⇒ latest                    ▏█████████████████████████▕ 14,300,744 ops/sec | 13 samples (baseline)
- ⇒ trunk                     ▏██████████████████████▌──▕ 12,946,295 ops/sec | 11 samples (1.10x slower)
- ⇒ #perf/keys                ▏██████████████████████▌──▕ 12,965,191 ops/sec | 10 samples (1.10x slower)
+ ⇒ latest                    ▏█████████████████████████▕ 15,421,923 ops/sec | 11 samples (baseline)
+ ⇒ trunk                     ▏██████████████████████▌──▕ 13,928,853 ops/sec | 10 samples (1.11x slower)
+ ⇒ #perf/keys                ▏██████████████████████▌──▕ 14,117,921 ops/sec | 11 samples (1.09x slower)
 
 ```
 
@@ -129,7 +149,8 @@ version under test. Any entries between first and last are reference versions or
 if the code under test has undone any improvements added in recent PRs.
 
 ```
-import current from "..";
+import { createRequire } from 'node:module';
+import Path from 'path';
 
 const benchmark = new Faceoff({
   "latest": "prom-client@latest",
@@ -141,20 +162,35 @@ benchmark.suite('constructors', (suite) => {
   suite.add('new Registry()', ({ Registry }) => new Registry());
 });
 
-benchmark.suite('util', (suite) => {
-  suite.add(
-    'LabelMap.keyFrom()',
-    (client, labelMap) => labelMap.keyFrom({ foo: 'longish', user_agent: 'Chrome', status_code: 503 }),
-    {
-      setup: (_, location) => {
-        const require = createRequire(location);
-        const { LabelMap } = require(Path.join(location, "lib/util.js"));
-        return new LabelMap([ 'foo', 'user_agent' ]);
-      },
-      skip: ["prom-client@latest"],
+benchmark.suite('util',
+  (suite) => {
+    suite.add('LabelMap.validate()',
+      (client, labelMap) => {
+        labelMap.validate({
+          foo: 'longish:tag:goes:here',
+          user_agent: 'Chrome',
+          status_code: 503,
+        });
+      }
+    );
+  
+    suite.add('LabelMap.keyFrom()',
+      (client, labelMap) => labelMap.keyFrom({ 
+        foo: 'longish',
+        user_agent: 'Chrome',
+        status_code: 503
+      }),
+      { ttest: true },
+    );
+  }, {
+    setup: (_, location) => {
+      const require = createRequire(location);
+      const { LabelMap } = require(Path.join(location, "lib/util.js"));
+      return new LabelMap([ 'foo', 'user_agent' ]);
     },
-  );
-});
+    skip: ["prom-client@latest"],
+  }
+);
 
 ```
 
