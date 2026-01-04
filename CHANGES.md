@@ -1,5 +1,10 @@
 # Important Changes
 
+## 1.2.0
+
+ - You can now set default benchmark options on suites, improving ergonomics for nested suites with
+common lifecycle functions or settings
+
 ## 1.1.0
 
  - Green text when no regressions are found

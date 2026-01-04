@@ -15,34 +15,34 @@ benchmark.suite('constructors', (suite) => {
 
   let counter = 0;
 
-  suite.add('new Counter()', ({ Counter }, registry) => {
-    return new Counter({
-      name: `Counter_${counter++}`,
-      help: 'Counter',
-      labelNames: [],
-      registers: [registry]
+  suite.suite('metrics', (suite) => {
+    suite.add('new Counter()', ({ Counter }, registry) => {
+      return new Counter({
+        name: `Counter_${counter++}`,
+        help: 'Counter',
+        labelNames: [],
+        registers: [registry]
+      });
+    }, {
+      maxTime: 0.1, // Unreasonably short to trigger inconclusive tests
+      maxSamples: 6,
     });
-  }, {
-    setup: ({ Registry }) => new Registry(),
-    teardown: (mod, registry) => registry.clear(),
-    maxTime: 0.1, // Unreasonably short to trigger inconclusive tests
-    maxSamples: 6,
-    ttest: true,
-  });
 
-  suite.add('new Gauge()', ({ Gauge }, registry) => {
-    return new Gauge({
-      name: `Gauge_${counter++}`,
-      help: 'Gauge',
-      labelNames: [],
-      registers: [registry]
+    suite.add('new Gauge()', ({ Gauge }, registry) => {
+      return new Gauge({
+        name: `Gauge_${counter++}`,
+        help: 'Gauge',
+        labelNames: [],
+        registers: [registry]
+      });
+    }, {
+      maxTime: 0.1, // Unreasonably short to trigger inconclusive tests
+      maxSamples: 6,
     });
   }, {
-    setup: ({ Registry }) => new Registry(),
+    setup: ({Registry}) => new Registry(),
     teardown: (mod, registry) => registry.clear(),
-    maxTime: 0.1, // Unreasonably short to trigger inconclusive tests
-    maxSamples: 6,
-    ttest: true,
+    ttest: true
   });
 });
 
