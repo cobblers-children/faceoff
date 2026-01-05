@@ -36,13 +36,12 @@ benchmark.suite('constructors', (suite) => {
         registers: [registry]
       });
     }, {
-      maxTime: 0.1, // Unreasonably short to trigger inconclusive tests
-      maxSamples: 6,
+      minSamples: 30,
     });
   }, {
     setup: ({Registry}) => new Registry(),
     teardown: (mod, registry) => registry.clear(),
-    ttest: true
+    ttest: true,
   });
 });
 

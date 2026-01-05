@@ -198,9 +198,9 @@ describe("Util", () => {
     });
   });
 
-  describe("chartReport()", () => {
+  describe("toString()", () => {
     it("handles empty results", () => {
-      expect(() => Util.chartResults([])).not.to.throw();
+      expect(() => Util.toString([])).not.to.throw();
     });
 
     it("handles results", () => {
@@ -231,7 +231,40 @@ describe("Util", () => {
         ]
       ];
 
-      expect(() => Util.chartResults(input)).not.to.throw();
+      expect(() => Util.toString(input)).not.to.throw();
+    });
+
+    it("formats the output", () => {
+      let input = [
+        [
+          {
+            name: 'foo ⇒ a',
+            iterations: 200,
+            fastest: true,
+            histogram: {
+              "samples": 11,
+              "min": 1966.0067526089626,
+              "max": 2096.9027705175117,
+            },
+            "opsSec": 1989.98778631387,
+          },
+          {
+            name: 'foo ⇒ b',
+            iterations: 200,
+            slowest: true,
+            histogram: {
+              "samples": 12,
+              "min": 1766.0067526089626,
+              "max": 2096.9027705175117,
+            },
+            "opsSec": 1801.98778631387,
+          },
+        ]
+      ];
+
+      let actual = Util.toString(input);
+      expect(actual).to.include("Node.js version:");
+      expect(actual).to.include("Performance Regressions:");
     });
   });
 
