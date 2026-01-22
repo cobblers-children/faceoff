@@ -1,9 +1,10 @@
-import { beforeEach, describe, it } from "node:test";
+import { beforeEach, afterEach, describe, it } from "node:test";
 import chai from 'chai';
 import spies from "chai-spies";
 import chaiAsPromised from 'chai-as-promised';
 import chaiString from 'chai-string';
 import Faceoff from "../../lib/index.js";
+import { Suite } from "bench-node";
 
 chai.use(chaiAsPromised);
 chai.use(chaiString);
@@ -65,6 +66,45 @@ describe("faceoff", () => {
         });
 
         expect(benchmark.suites).to.have.length(1);
+      });
+
+      describe("defaults", () => {
+        const sandbox = chai.spy.sandbox();
+
+        beforeEach(() => {
+          benchmark = new Faceoff({ currentVersion: { location: "." } }, { minSamples: 17 });
+          sandbox.on(Suite.prototype, "add");
+        });
+
+        afterEach(() => {
+          sandbox.restore();
+        });
+
+        it("are inherited", () => {
+          benchmark.suite("name", (suite) => {
+            suite.suite("nested", (suite) => {
+              suite.add("a test", () => {});
+            });
+          });
+
+          expect(Suite.prototype.add).to.have.been.called.with(
+            "name ⇒ nested ⇒ a test ⇒ currentVersion",
+            { minSamples: 17, baseline: true }
+          );
+        });
+
+        it("can override the defaults", async () => {
+          benchmark.suite("name", (suite) => {
+            suite.suite("nested", (suite) => {
+              suite.add("a test", () => {}, { minSamples: 33 });
+            });
+          });
+
+          expect(Suite.prototype.add).to.have.been.called.with(
+              "name ⇒ nested ⇒ a test ⇒ currentVersion",
+              { minSamples: 33, baseline: true }
+          );
+        });
       });
     });
 

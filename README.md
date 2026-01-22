@@ -7,7 +7,7 @@
 ## Benchmarking Tool for Comparing Application Versions
 
 This is a benchmarking tool meant for comparing different versions of the same
-code against each other. It is aiming for feature parity with 
+code against each other. It is aiming for feature parity with
 [benchmark-regression](https://github.com/nowells/benchmark-regression)
 but built on top of [bench-node](https://github.com/RafaelGSS/bench-node).
 
@@ -16,7 +16,7 @@ Features:
 - supports comparing multiple versions of modules
 - can install versions from git urls
 - handles async tests
-- can skip tests for version where functionality is missing 
+- can skip tests for version where functionality is missing
 - formatted summary view
 - exposes metadata for whitebox testing of module internals
 
@@ -24,7 +24,7 @@ Features:
 
 Faceoff and `benchmark-regression` before it are focussed on preventing regressions in pull requests
 by comparing the code in your branch to the same code in previous releases. Where Faceoff differs is
-that it can also compare a feature branch to release branches, or your trunk build. This is 
+that it can also compare a feature branch to release branches, or your trunk build. This is
 particularly handy on projects where releases collect a number of PRs into a single build instead of
 practicing Continuous Integration.
 
@@ -156,7 +156,7 @@ const benchmark = new Faceoff({
   "latest": "prom-client@latest",
   "trunk": "git@github.com:siimon/prom-client",
   "current": { location: "." },
-});
+}, { minSamples: 45 });
 
 benchmark.suite('constructors', (suite) => {
   suite.add('new Registry()', ({ Registry }) => new Registry());
