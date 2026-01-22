@@ -1,0 +1,6 @@
+{
+  "name": "Faceoff Container",
+  "build": {
+    "dockerfile": "../Dockerfile"
+  }
+}
