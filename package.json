@@ -5,10 +5,10 @@
   "main": "lib/index.js",
   "type": "module",
   "scripts": {
-    "test": "npm run coverage && npm run smoke",
+    "ci": "npm run coverage && npm run smoke",
     "unit": "node --allow-natives-syntax --test --test-reporter spec test/unit/*.js",
     "integration": "node --allow-natives-syntax --test --test-reporter spec test/integration/*.js",
-    "tests": "npm run unit && npm run integration",
+    "test": "npm run unit && npm run integration",
     "coverage": "c8 npm run tests",
     "watch": "node --allow-natives-syntax --test --watch --test-reporter spec 'test/unit/**'",
     "smoke": "node --allow-natives-syntax examples/prom-client.js && node --allow-natives-syntax examples/p-limit.js"
