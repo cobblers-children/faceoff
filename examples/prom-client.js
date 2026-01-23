@@ -35,13 +35,10 @@ benchmark.suite('constructors', (suite) => {
         labelNames: [],
         registers: [registry]
       });
-    }, {
-      minSamples: 30,
     });
   }, {
     setup: ({Registry}) => new Registry(),
-    teardown: (mod, registry) => registry.clear(),
-    ttest: true,
+    teardown: (mod, registry) => registry.clear()
   });
 });
 
