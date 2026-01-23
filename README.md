@@ -274,6 +274,20 @@ until at least 2.0:
 }
 ```
 
+### Inconclusive Tests
+
+Every test run has noise. When a test has a lot of jitter in it, the average time per run does not prove that one case is
+consistently 10% faster than another. A Statistical Analysis called the t-test compares two sets of
+samples against each other to determine if the spread of values indicated a pattern or just noise - 
+Whether the results are significant or not.
+
+The problem is that Faceoff presents an arbitrary number of versions and invites the user to 
+compare them all against each other. As far as we are aware, the transitive property does not 
+necessarily apply to significance tests. If two results are significant to a third, that does not mean they are significant in relationship to
+each other.
+
+We report a test as slow if the current (subject) version is slower than the fastest version by 5%,
+
 #### Parsing advice
 
 The most likely change in 2.0 would be to the 'name' fields to make it more amenable to
