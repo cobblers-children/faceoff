@@ -15,8 +15,8 @@ describe("Util", () => {
     let noisySamples;
 
     beforeEach(() => {
-      cleanSamples = [...Array(40).keys().map((e) => e + 1000)];
-      noisySamples = [...Array(40).keys().map((e) => e * 50 + 100)];
+      cleanSamples = [...Array.from(Array(40).keys()).map((i) => i + 1000)];
+      noisySamples = [...Array.from(Array(40).keys()).map((i) => i  * 50 + 100)];
     });
 
     it("handles empty results", () => {
