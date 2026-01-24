@@ -44,47 +44,7 @@ Installing [latest]: prom-client@latest
 Installing [trunk]: git@github.com:siimon/prom-client
 Installing [#perf/keys]: git@github.com:cobblers-children/prom-client.git#perf/keys
 
-constructors ⇒ new Registry() ⇒ latest        x 15,421,923 ops/sec (11 runs sampled) min..max=(60.03ns...70.78ns)
-constructors ⇒ new Registry() ⇒ trunk         x 13,928,853 ops/sec (10 runs sampled) min..max=(69.93ns...72.07ns)
-constructors ⇒ new Registry() ⇒ #perf/keys    x 14,117,921 ops/sec (11 runs sampled) min..max=(69.80ns...72.05ns)
-
-Summary (vs. baseline):
-  constructors ⇒ new Registry() ⇒ latest      (baseline)
-  constructors ⇒ new Registry() ⇒ trunk       (1.11x slower)
-  constructors ⇒ new Registry() ⇒ #perf/keys  (1.09x slower)
-
-T-Test Mode: Enabled (repeatSuite=30)
-
-constructors ⇒ metrics ⇒ new Counter() ⇒ latest x 1,165,364 ops/sec (114 runs sampled) min..max=(524.08ns...1.08us)
-constructors ⇒ metrics ⇒ new Counter() ⇒ trunk x 1,240,467 ops/sec (91 runs sampled) min..max=(464.48ns...1.05us)
-constructors ⇒ metrics ⇒ new Counter() ⇒ #perf/keys x 1,234,452 ops/sec (94 runs sampled) min..max=(312.50ns...1.25us)
-
-Summary (vs. baseline):
-  constructors ⇒ metrics ⇒ new Counter() ⇒ latest      (baseline)
-  constructors ⇒ metrics ⇒ new Counter() ⇒ #perf/keys  (1.06x faster) **
-  constructors ⇒ metrics ⇒ new Counter() ⇒ trunk       (1.06x faster) **
-
-  Significance: * p<0.05, ** p<0.01, *** p<0.001
-
-T-Test Mode: Enabled (repeatSuite=30)
-
-constructors ⇒ metrics ⇒ new Gauge() ⇒ latest x 1,263,116 ops/sec (154 runs sampled) min..max=(546.66ns...1.11us)
-constructors ⇒ metrics ⇒ new Gauge() ⇒ trunk  x 1,325,398 ops/sec (117 runs sampled) min..max=(333.50ns...1.03us)
-constructors ⇒ metrics ⇒ new Gauge() ⇒ #perf/keys x 1,299,054 ops/sec (67 runs sampled) min..max=(640.38ns...948.08ns)
-
-Summary (vs. baseline):
-  constructors ⇒ metrics ⇒ new Gauge() ⇒ latest      (baseline)
-  constructors ⇒ metrics ⇒ new Gauge() ⇒ #perf/keys  (1.03x faster)
-  constructors ⇒ metrics ⇒ new Gauge() ⇒ trunk       (1.05x faster) ***
-
-  Significance: * p<0.05, ** p<0.01, *** p<0.001
-
-util ⇒ LabelMap.keyFrom() ⇒ trunk             x 7,661,811 ops/sec (12 runs sampled) min..max=(125.51ns...133.63ns)
-util ⇒ LabelMap.keyFrom() ⇒ #perf/keys        x 7,507,553 ops/sec (12 runs sampled) min..max=(130.53ns...134.71ns)
-
-Summary (vs. baseline):
-  util ⇒ LabelMap.keyFrom() ⇒ trunk       (baseline)
-  util ⇒ LabelMap.keyFrom() ⇒ #perf/keys  (1.02x slower)
+...
 
 Node.js version: v22.18.0
 Platform: darwin arm64
@@ -93,48 +53,50 @@ CPU Cores: 12 vCPUs | 64.0GB Mem
 
 constructors ⇒ new Registry()
 
-Summary (vs. baseline):
- ⇒ latest                    ▏█████████████████████████▕ 15,421,923 ops/sec | 11 samples (baseline)
- ⇒ trunk                     ▏██████████████████████▌──▕ 13,928,853 ops/sec | 10 samples (1.11x slower)
- ⇒ #perf/keys                ▏██████████████████████▌──▕ 14,117,921 ops/sec | 11 samples (1.09x slower)
+ ⇒ latest                  ▏████████████████████▕ 14,374,847 op/s | 39 samples | (baseline)
+ ⇒ trunk                   ▏██████████████████──▕ 13,271,458 op/s | 40 samples | (0.92x slower)
+ ⇒ #perf/keys              ▏██████████████████──▕ 13,239,009 op/s | 40 samples | (0.92x slower)
 
 constructors ⇒ metrics ⇒ new Counter()
 
-Summary (vs. baseline):
- ⇒ latest                    ▏███████████████████████──▕ 1,165,364 ops/sec | 114 samples (baseline)
- ⇒ trunk                     ▏█████████████████████████▕ 1,240,467 ops/sec | 91 samples (1.06x faster)
- ⇒ #perf/keys                ▏████████████████████████▌▕ 1,234,452 ops/sec | 94 samples (1.06x faster)
+ ⇒ latest                  ▏█████████████████▌──▕ 1,023,814 op/s | 36 samples | (baseline)
+ ⇒ trunk                   ▏████████████████████▕ 1,169,455 op/s | 36 samples | (1.14x faster)
+ ⇒ #perf/keys              ▏█████████████████▌──▕ 1,028,717 op/s | 36 samples | (1.00x faster)
 
 constructors ⇒ metrics ⇒ new Gauge()
 
-Summary (vs. baseline):
- ⇒ latest                    ▏███████████████████████▌─▕ 1,263,116 ops/sec | 154 samples (baseline)
- ⇒ trunk                     ▏█████████████████████████▕ 1,325,398 ops/sec | 117 samples (1.05x faster)
- ⇒ #perf/keys                ▏████████████████████████▌▕ 1,299,054 ops/sec | 67 samples (1.03x faster)
+ ⇒ latest                  ▏████████████████████▕ 1,154,011 op/s | 40 samples | (baseline)
+ ⇒ trunk                   ▏███████████████████▌▕ 1,137,773 op/s | 41 samples | (0.99x slower)
+ ⇒ #perf/keys              ▏███████████████████─▕ 1,097,195 op/s | 41 samples | (0.95x slower)
 
 util ⇒ LabelMap.keyFrom()
 
-Summary (vs. baseline):
- ⇒ trunk                     ▏█████████████████████████▕ 7,661,811 ops/sec | 12 samples (baseline)
- ⇒ #perf/keys                ▏████████████████████████─▕ 7,507,553 ops/sec | 12 samples (1.02x slower)
+ ⇒ trunk                   ▏████████████████████▕ 7,260,850 op/s | 40 samples | (baseline)
+ ⇒ #perf/keys              ▏███████████████████▌▕ 7,209,349 op/s | 40 samples | (0.99x slower)
 
 
 Inconclusive Tests:
 ------------------------
 
-constructors ⇒ metrics ⇒ new Gauge()
- ⇒ latest                    ▏███████████████████████▌─▕ 1,263,116 ops/sec | 154 samples (baseline)
- ⇒ trunk                     ▏█████████████████████████▕ 1,325,398 ops/sec | 117 samples (1.05x faster)
- ⇒ #perf/keys                ▏████████████████████████▌▕ 1,299,054 ops/sec | 67 samples (1.03x faster)
+util ⇒ LabelMap.keyFrom()
 
+ ⇒ trunk                   ▏████████████████████▕ 7,260,850 op/s | 40 samples | (baseline)
+ ⇒ #perf/keys              ▏███████████████████▌▕ 7,209,349 op/s | 40 samples | (0.99x slower)
 
 Performance Regressions:
 ------------------------
 
-constructors ⇒ new Registry()
- ⇒ latest                    ▏█████████████████████████▕ 15,421,923 ops/sec | 11 samples (baseline)
- ⇒ trunk                     ▏██████████████████████▌──▕ 13,928,853 ops/sec | 10 samples (1.11x slower)
- ⇒ #perf/keys                ▏██████████████████████▌──▕ 14,117,921 ops/sec | 11 samples (1.09x slower)
+ ⇒ latest                  ▏████████████████████▕ 14,374,847 op/s | 39 samples | (baseline)
+ ⇒ trunk                   ▏██████████████████──▕ 13,271,458 op/s | 40 samples | (0.92x slower)
+ ⇒ #perf/keys              ▏██████████████████──▕ 13,239,009 op/s | 40 samples | (0.92x slower)
+
+ ⇒ latest                  ▏█████████████████▌──▕ 1,023,814 op/s | 36 samples | (baseline)
+ ⇒ trunk                   ▏████████████████████▕ 1,169,455 op/s | 36 samples | (1.14x faster)
+ ⇒ #perf/keys              ▏█████████████████▌──▕ 1,028,717 op/s | 36 samples | (1.00x faster)
+
+ ⇒ latest                  ▏████████████████████▕ 1,154,011 op/s | 40 samples | (baseline)
+ ⇒ trunk                   ▏███████████████████▌▕ 1,137,773 op/s | 41 samples | (0.99x slower)
+ ⇒ #perf/keys              ▏███████████████████─▕ 1,097,195 op/s | 41 samples | (0.95x slower)
 
 ```
 
