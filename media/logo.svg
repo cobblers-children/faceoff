@@ -2,7 +2,7 @@
   <style>
     text {
       font-family: "Courier New", monospace;
-      font-size: 30px;
+      font-size: 20px;
 
       stroke: black;
       stroke-width: 2;
@@ -18,8 +18,8 @@
     }
   </style>
 
-  <text x="15" y="50" fill="#222">▏████████▌─▕</text>
-  <text x="15" y="100" fill="#cc042C">▏███████───▕</text>
-  <text x="15" y="150" fill="forestgreen">▏██████████▕</text>
-  <text x="250" y="160" class="title" fill="forestgreen">Faceoff</text>
+  <text x="20" y="60" fill="#222">▏████████▌─▕</text>
+  <text x="20" y="100" fill="#cc042C">▏███████───▕</text>
+  <text x="20" y="140" fill="forestgreen">▏██████████▕</text>
+  <text x="200" y="145" class="title" fill="forestgreen">Faceoff</text>
 </svg>
