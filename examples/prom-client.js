@@ -74,6 +74,7 @@ benchmark.suite('util', (suite) => {
 await benchmark.run(
   {
     output: "./output/benchmark-results/prom-client.json",
-    slow: 0.93
+    slow: 0.93,
+    success: { }
   }
 );
