@@ -1,5 +1,10 @@
 # Important Changes
 
+## 1.4.0 (under development)
+
+ - 'Slow Test' criteria is now configurable
+ - Runs can now optionally fail on regressions over a threshold
+
 ## 1.3.0
 
  - Faceoff now scans for and enumerates inconclusive tests via t-test

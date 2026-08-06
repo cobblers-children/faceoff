@@ -154,6 +154,8 @@ benchmark.suite('util',
   }
 );
 
+await benchmark.run({ output: "./output/benchmark-results.json" });
+
 ```
 
 ### benchmark.json file format
