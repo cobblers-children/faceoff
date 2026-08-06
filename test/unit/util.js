@@ -99,6 +99,36 @@ describe("Util", () => {
       expect(Object.keys(actual)).to.have.length(1);
     });
 
+    it("has a configurable cutoff", () => {
+      let input = [
+        {
+          name: 'foo ⇒ a',
+          iterations: 200,
+          fastest: true,
+          histogram: {
+            "samples": 11,
+            "min": 1966.0067526089626,
+            "max": 2096.9027705175117,
+          },
+          "opsSec": 1989.98778631387,
+        },
+        {
+          name: 'foo ⇒ b',
+          iterations: 200,
+          slowest: true,
+          histogram: {
+            "samples": 12,
+            "min": 1766.0067526089626,
+            "max": 2096.9027705175117,
+          },
+          "opsSec": 1801.98778631387,
+        },
+      ];
+
+      let actual = Util.findSlow([input], 0.9);
+      expect(Object.keys(actual)).to.be.empty;
+    });
+
     it("filters out fast tests", () => {
       let input = [
         {
