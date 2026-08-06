@@ -110,7 +110,7 @@ The convention used is that the first version provided is the baseline, and the 
 version under test. Any entries between first and last are reference versions or branches to detect
 if the code under test has undone any improvements added in recent PRs.
 
-```
+```javascript
 import { createRequire } from 'node:module';
 import Path from 'path';
 
@@ -153,6 +153,8 @@ benchmark.suite('util',
     skip: ["prom-client@latest"],
   }
 );
+
+await benchmark.run({ output: "./output/benchmark-results.json", slow: 0.94 });
 
 ```
 
@@ -238,17 +240,30 @@ until at least 2.0:
 
 ### Inconclusive Tests
 
-Every test run has noise. When a test has a lot of jitter in it, the average time per run does not prove that one case is
-consistently 10% faster than another. A Statistical Analysis called the t-test compares two sets of
-samples against each other to determine if the spread of values indicated a pattern or just noise - 
-Whether the results are significant or not.
+Every test run has noise. When a test has a lot of jitter in it, the average time per run does not
+prove that one case is consistently 10% faster than another. A Statistical Analysis called the
+t-test compares two sets of samples against each other to determine if the spread of values
+indicated a pattern or just noise - Whether the results are significant or not.
 
-The problem is that Faceoff presents an arbitrary number of versions and invites the user to 
-compare them all against each other. As far as we are aware, the transitive property does not 
-necessarily apply to significance tests. If two results are significant to a third, that does not mean they are significant in relationship to
-each other.
+The problem is that Faceoff presents an arbitrary number of versions and invites the user to
+compare them all against each other. As far as we are aware, the transitive property does not
+necessarily apply to significance tests. If two results are significant to a third, that does not
+mean they are significant in relationship to each other.
 
 We report a test as slow if the current (subject) version is slower than the fastest version by 5%,
+
+### Slow Tests
+
+Tests which are conclusive and show a greater than 5% reduction in speed are flagged as Slow. You
+can optionally fail the run if too many tests show a slowdown.
+
+```javascript
+await benchmark.run({ success: {
+    threshold: 1 // Fail on two or more slow results
+  }
+});
+
+```
 
 #### Parsing advice
 

@@ -1,5 +1,16 @@
 # Important Changes
 
+## 1.4.0 (under development)
+
+ - 'Slow Test' criteria is now configurable
+ - Runs can now optionally fail on regressions over a threshold
+
+## 1.3.0
+
+ - Faceoff now scans for and enumerates inconclusive tests via t-test
+ - More compact display of summary data, for better reading comprehension, particularly in CI
+ - You can now apply default options across all suites
+
 ## 1.2.0
 
  - You can now set default benchmark options on suites, improving ergonomics for nested suites with
