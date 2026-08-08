@@ -1,6 +1,6 @@
 # Important Changes
 
-## 1.4.0 (under development)
+## 1.4.0
 
  - 'Slow Test' criteria is now configurable
  - Runs can now optionally fail on regressions over a threshold
