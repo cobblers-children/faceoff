@@ -259,8 +259,8 @@ describe("Util", () => {
     });
 
     it("formats the output", () => {
-      let input = [
-        [
+      let input = {
+        one: [
           {
             name: 'foo ⇒ a',
             iterations: 200,
@@ -284,11 +284,49 @@ describe("Util", () => {
             "opsSec": 1801.98778631387,
           },
         ]
-      ];
+      };
 
       let actual = Util.toString(input);
       expect(actual).to.include("Node.js version:");
       expect(actual).to.include("Performance Regressions:");
+    });
+
+    describe("options", () => {
+      let input;
+      beforeEach(() => {
+        input = {
+          one: [
+            {
+              name: 'foo ⇒ a',
+              iterations: 200,
+              fastest: true,
+              histogram: {
+                "samples": 11,
+                "min": 1966.0067526089626,
+                "max": 2096.9027705175117,
+              },
+              "opsSec": 1989.98778631387,
+            },
+            {
+              name: 'foo ⇒ b',
+              iterations: 200,
+              slowest: true,
+              histogram: {
+                "samples": 12,
+                "min": 1766.0067526089626,
+                "max": 2096.9027705175117,
+              },
+              "opsSec": 1801.98778631387,
+            },
+          ]
+        };
+      });
+
+      it("can override slow check limit", () => {
+        let actual = Util.toString(input, { limit: 0.9 });
+        expect(actual).to.include("Node.js version:");
+        expect(actual).not.to.include("Performance Regressions:");
+      });
     });
   });
 
