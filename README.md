@@ -150,7 +150,7 @@ benchmark.suite('util',
       const { LabelMap } = require(Path.join(location, "lib/util.js"));
       return new LabelMap([ 'foo', 'user_agent' ]);
     },
-    skip: ["prom-client@latest"],
+    skip: ["latest"],
   }
 );
 
