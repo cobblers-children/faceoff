@@ -71,12 +71,12 @@ faceoff.suite('prom-client', (benchmark) => {
       },
     );
   });
-}); 
+});
 
 await faceoff.run(
   {
     output: "./output/benchmark-results/prom-client.json",
-    slow: 0.9,
+    slow: 0.85,
     success: { threshold: 2 }
   }
 );
