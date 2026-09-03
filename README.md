@@ -1,7 +1,8 @@
 # <img src="media/logo.svg" alt="faceoff"/>
 
+[![CI](https://github.com/cobblers-children/faceoff/actions/workflows/node.js.yml/badge.svg)](https://github.com/node-config/node-config/actions/workflows/tests.yml)
 [![npm package](https://img.shields.io/npm/v/faceoff)](https://www.npmjs.com/package/faceoff)
-[![Downloads](https://badgen.net/npm/dt/faceoff)](https://www.npmjs.com/package/faceoff)
+[![Downloads](https://img.shields.io/npm/dm/faceoff)](https://www.npmjs.com/package/faceoff)
 [![Issues](https://img.shields.io/github/issues/cobblers-children/faceoff)](https://github.com/cobblers-children/faceoff/issues)
 
 ## Benchmarking Tool for Comparing Application Versions
